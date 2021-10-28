@@ -3,6 +3,7 @@ import TitleSection from "../../components/TitleSection"
 import { useStore } from "../../context/StoreContext"
 import CarouselGallery from "../../components/CarouselGallery"
 import BannerTitle from "../../components/BannerTitle"
+import { Link } from "react-router-dom"
 const AboutUsPage = () => {
     const { pages, dispatch } = useStore()
     const page = pages.about_us
@@ -184,8 +185,8 @@ const AboutUsPage = () => {
                             Hotel Cartagena.
                         </div>
                         <div>
-                            <a
-                                href="{{route('reservation.index')}}"
+                            <Link
+                                to="/reservation"
                                 className="px-4 py-2 justify-center  md:px-6 rounded-full text-white bg-orange-500 flex md:inline-flex items-center  space-x-2 "
                             >
                                 <span className="font-bold ">Reservacion</span>
@@ -198,7 +199,7 @@ const AboutUsPage = () => {
                                 >
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                                 </svg>
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </div>

@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 const RoomSelectPrice = ({room}) => {
     return (
         <div>
@@ -14,12 +16,12 @@ const RoomSelectPrice = ({room}) => {
                     <span>Niños: {room.kids}</span>
                 </div>
                 <div className="space-y-3 text-center">
-                    <a
-                        href="{{route('reservation.index')}}"
+                    <Link
+                        href="/reservation"
                         className="block w-full bg-orange-500 py-3 text-lg text-white rounded-full font-bold"
                     >
                         Reservar
-                    </a>
+                    </Link>
                     <div className="text-sm text-gray-400">Consultar la disponibilidad de esta habitación</div>
                 </div>
             </div>

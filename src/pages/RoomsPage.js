@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link,useHistory } from "react-router-dom"
 
 import { useStore } from "../context/StoreContext"
 import BannerTitle from "../components/BannerTitle"
@@ -6,12 +6,18 @@ import BannerTitle from "../components/BannerTitle"
 const RoomsPage = () => {
     const { pages,rooms} = useStore()
     const page = pages.rooms
+    const history=useHistory()
+
+    const hanldeSumbit=(e)=>{
+        e.preventDefault()
+        history.push('/reservation');
+    }
     
     return (
         <>
             <div className="border-b border-gray-100">
                 <div className="container mx-auto max-w-screen-xl">
-                    <form action="{{route('reservation.index')}}" className="py-4  flex space-y-3 xl:space-y-0 flex-wrap ">
+                    <form action="" onSubmit={hanldeSumbit} className="py-4  flex space-y-3 xl:space-y-0 flex-wrap ">
                         <div className="w-full xl:w-5/12 xl:pr-4 ">
                             <div className="flex flex-wrap  border border-gray-300 rounded-lg md:divide-x h-full">
                                 <div className="w-full  md:w-1/2 py-0 px-4 inline-flex space-x-2 items-center  ">

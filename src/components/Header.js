@@ -25,7 +25,7 @@ export default function Header({ routes }) {
         <nav
             className={
                 (open ? "bg-white " : "") +
-                " lg:px-10 xl:px-12 lg:py-5 mx-auto z-50 flex flex-col lg:flex-row lg:justify-between  lg:text-base font-medium lg:font-bold   tracking-wide  " +
+                " lg:px-10 xl:px-12 lg:py-5 mx-auto z-50 flex flex-col lg:flex-row lg:justify-between  lg:text-base font-medium lg:font-bold  w-full  tracking-wide  " +
                 (navbar === "img" ? "lg:bg-transparent text-white absolute inset-x-0" : "bg-white text-gray-600 border-b border-gray-100")
             }
         >
