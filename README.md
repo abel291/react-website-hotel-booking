@@ -9,4 +9,4 @@ _In the project directory, you can run:._
 ### `npm run start`
 
 ### Screenshot 🖥️️
-![screenshot-1](https://repository-images.githubusercontent.com/422110471/6de4953c-8dc6-4ac1-b546-78c669654e77)
+![screenshot-1](https://repository-images.githubusercontent.com/422110471/f8aa50f3-3f6d-4e0b-b402-c8c7d43523af)
