@@ -31,8 +31,8 @@ const CarouselGallery = ({images,path ,height='500px'}) => {
                     }}
                 >
                     <div>
-                        {images.map((image) => (
-                            <SwiperSlide key={image.id}>
+                        {images.map((image,key) => (
+                            <SwiperSlide key={key} >
                                 <img 
                                     //className="object-cover w-full mx-auto"
                                     className=" h-full mx-auto object-cover w-full"

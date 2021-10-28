@@ -13,7 +13,7 @@ const BlogPage = () => {
     const page = pages.blog
     const history = useHistory()
     const location = history.location
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, /*setIsLoading*/] = useState(false)
     // useEffect(() => {
     //     const getBlog = async (pagination = 1) => {
     //         setIsLoading(true)
@@ -45,7 +45,7 @@ const BlogPage = () => {
         if (!blog || pagination !== blog.current_page) {
             getBlog(pagination)
         }
-    }, [dispatch, fakeApi, location.search])
+    }, [dispatch, fakeApi, location.search,blog])
 
     return (
         <>

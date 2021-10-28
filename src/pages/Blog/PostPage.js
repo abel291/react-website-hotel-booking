@@ -7,7 +7,7 @@ import moment from "moment"
 import "moment/locale/es"
 import blogJson from "../../dataJson/blog.json"
 const PostPage = () => {
-    const { dispatch, blog,fakeApi } = useStore()
+    const { dispatch, blog, fakeApi } = useStore()
 
     const { slug } = useParams()
     const [post, setPost] = useState(null)
@@ -17,13 +17,18 @@ const PostPage = () => {
     }, [dispatch])
 
     useEffect(() => {
+        const getPost = async (slug) => {
+            fakeApi(() => {
+                setPost(blogJson.data.find((post) => post.slug === slug))
+            })
+        }
         if (!blog) {
             getPost(slug)
         } else {
             console.log(blog)
             setPost(blog.data.find((post) => post.slug === slug))
         }
-    }, [blog, slug])
+    }, [blog, slug,fakeApi])
 
     // const getPost = async (slug) => {
     //     await apiClient
@@ -36,14 +41,6 @@ const PostPage = () => {
     //         })
     // }
 
-    const getPost = async (slug) => {  
-        fakeApi(() => {
-            setPost(blogJson.data.find((post) => post.slug === slug))
-        })      
-        
-    }
-
-    
     return (
         <div className="container mx-auto max-w-screen-xl py-content">
             {!post ? (

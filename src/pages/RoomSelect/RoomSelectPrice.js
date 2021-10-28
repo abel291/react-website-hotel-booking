@@ -17,7 +17,7 @@ const RoomSelectPrice = ({room}) => {
                 </div>
                 <div className="space-y-3 text-center">
                     <Link
-                        href="/reservation"
+                        to="/reservation"
                         className="block w-full bg-orange-500 py-3 text-lg text-white rounded-full font-bold"
                     >
                         Reservar
