@@ -1,0 +1,318 @@
+import TitleSection from "../components/TitleSection"
+import { useStore } from "../context/StoreContext"
+import { useState } from "react"
+import { ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/outline"
+
+import { Link, useHistory } from "react-router-dom"
+
+import { Swiper, SwiperSlide } from "swiper/react"
+import SwiperCore, { Navigation, Autoplay } from "swiper"
+import "swiper/swiper-bundle.css"
+
+import Flatpickr from "react-flatpickr"
+import "flatpickr/dist/themes/material_green.css"
+import { Spanish } from "flatpickr/dist/l10n/es.js"
+import BannerTitle from "../components/BannerTitle"
+const testimonals = [
+    {
+        title: "¡El mejor hotel! ",
+        text: "El hotel tiene todo lo necesario. En la planta baja hay un lobby bar, en el segundo piso hay una zona con piscina interior y sauna, en el séptimo piso hay un restaurante y spa-salón. Las habitaciones se limpian todos los días.",
+        name: "Jacob Lane from USA",
+    },
+    {
+        title: "Hotel confortable",
+        text: "- Bueno, qué puedo decir, cada año, día y hora, este lugar se está transformando para mejor. El personal es completamente competente y amigable, todo a su alrededor está floreciendo, es agradable, nutritivo y hace que las vacaciones sean brillantes.",
+        name: "Victoria Wilson",
+    },
+    {
+        title: " El moderno",
+        text: "- El moderno Hotel Cartagena de 5 * es una solución ideal para combinar negocios y placer. El diseño elegante y el servicio excepcional satisfarán los deseos de cualquier huésped. 150 habitaciones con balcón (para no fumadores), vista al mar, restaurante de moda.",
+        name: "Max Edwart",
+    },
+    {
+        title: "¡El mejor hotel! ",
+        text: "El hotel tiene todo lo necesario. En la planta baja hay un lobby bar, en el segundo piso hay una zona con piscina interior y sauna, en el séptimo piso hay un restaurante y spa-salón. Las habitaciones se limpian todos los días.",
+        name: "Jacob Lane from USA",
+    },
+    {
+        title: "Hotel confortable",
+        text: "- Bueno, qué puedo decir, cada año, día y hora, este lugar se está transformando para mejor. El personal es completamente competente y amigable, todo a su alrededor está floreciendo, es agradable, nutritivo y hace que las vacaciones sean brillantes.",
+        name: "Victoria Wilson",
+    },
+    {
+        title: " El moderno",
+        text: "- El moderno Hotel Cartagena de 5 * es una solución ideal para combinar negocios y placer. El diseño elegante y el servicio excepcional satisfarán los deseos de cualquier huésped. 150 habitaciones con balcón (para no fumadores), vista al mar, restaurante de moda.",
+        name: "Max Edwart",
+    },
+]
+const optionInputDate = {
+    altInput: true,
+    altFormat: "F j, Y",
+    dateFormat: "Y-m-d",
+    firstDayOfWeek: 1,
+    locale: Spanish,
+}
+SwiperCore.use([Navigation, Autoplay])
+const HomePage = () => {
+    const { pages, rooms } = useStore()
+    const page = pages.home
+    const history = useHistory()
+
+    const [inputDate, setInputDate] = useState({
+        startDate: new Date().toISOString().slice(0, 10),
+        endDate: new Date().toISOString().slice(0, 10),
+        adults: 0,
+    })
+
+    const handleSubmitReservation = (e) => {
+        e.preventDefault()
+        history.push({ pathname: "/reservation" })
+    }
+    return (
+        <>
+            <BannerTitle title={page.title} subTitle={page.sub_title} img={"/storage/pages/" + page.img} />
+            <div className="container mx-auto  -mt-20 md:-mt-16 pb-8 border-gray-300 border-b lg:border-none ">
+                <form
+                    action="/reservation"
+                    className="flex flex-col items-center bg-white rounded-t-xl px-5 pt-5 overflow-hidden space-y-5 
+                                         lg:space-y-0 lg:space-x-6 lg:flex-row lg:p-8
+                                         lg:rounded-lg lg:shadow-xl"
+                >
+                    <div className="grid-cols-1 w-full    gap-8 grid md:grid-cols-3  ">
+                        <div>
+                            <label htmlFor="start_date" className="font-medium block tracking-widest text-gray-400 uppercase">
+                                Entrada:
+                            </label>
+                            <div className="lg:flex lg:items-center">
+                                <Flatpickr
+                                    name="startDate"
+                                    value={inputDate.startDate}
+                                    className="w-40 px-0 border-none font-bold text-gray-500  border-transparent focus:ring-transparent"
+                                    options={{
+                                        ...optionInputDate,
+                                        minDate: "today",
+                                    }}
+                                    onChange={(date) => {
+                                        let dateSelected = date[0]
+                                        setInputDate({ ...inputDate, startDate: dateSelected })
+                                        if (dateSelected >= inputDate.endDate) {
+                                            let addDays = dateSelected.fp_incr(1)
+                                            setInputDate({ ...inputDate, endDate: addDays })
+                                        }
+                                    }}
+                                />
+                                <ChevronDownIcon className="h-4 w-4" />
+                            </div>
+                        </div>
+
+                        <div>
+                            <label htmlFor="end_date" className="font-medium block tracking-widest text-gray-400 uppercase">
+                                Salida:
+                            </label>
+                            <div className="lg:flex lg:items-center">
+                                <Flatpickr
+                                    id="endDate"
+                                    name="endDate"
+                                    value={inputDate.endDate}
+                                    className="w-40 px-0 border-none font-bold text-gray-500  border-transparent focus:ring-transparent"
+                                    options={{
+                                        ...optionInputDate,
+                                        minDate: inputDate.startDate,
+                                    }}
+                                    onChange={(date) => setInputDate({ ...inputDate, endDate: date[0] })}
+                                />
+                                <label htmlFor="endDate">
+                                    <ChevronDownIcon className="h-4 w-4" />
+                                </label>
+                            </div>
+                        </div>
+                        <div>
+                            <label htmlFor="end_date" className="font-medium block tracking-widest text-gray-400 uppercase">
+                                Adultos:
+                            </label>
+                            <div className="lg:flex lg:items-center">
+                                <select
+                                    className="w-40 px-0 border-none font-bold text-gray-500  border-transparent focus:ring-transparent"
+                                    name="adults"
+                                    onChange={(e) => setInputDate({ ...inputDate, adults: e.target.value })}
+                                >
+                                    <option value="1">1 Adulto</option>
+                                    <option value="2">2 Adultos</option>
+                                    <option value="3">3 Adultos</option>
+                                    <option value="4">4 Adultos</option>
+                                    <option value="5">5 Adultos</option>
+                                    <option value="6">6 Adultos</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button
+                        type="submit"
+                        className="text-lg focus:outline-none bg-orange-500 text-white font-bold self-stretch uppercase text-center rounded-full lg:rounded-md  px-16  py-2 lg:text-left md:flex-grow"
+                        aria-label="btn_reservar"
+                        onClick={handleSubmitReservation}
+                    >
+                        Reservar
+                    </button>
+                </form>
+            </div>
+
+            <div className="container mx-auto  py-content space-y-8">
+                <div className=" md:w-1/2">
+                    <TitleSection title="Acerca de Nosotros" subTitle="Comienza tu asombrosa Aventura"></TitleSection>
+                </div>
+                <div className="flex md:flex-row flex-col space-y-5 md:space-y-0 md:space-x-5 font-medium leading-relaxed">
+                    <p>
+                        El clima subtropical húmedo, las altas montañas, la vegetación exótica, las interminables playas, los parques
+                        nacionales, la arquitectura histórica, los atractivos lugares de interés, los festivales de arte y el animado
+                        entorno multicultural hacen de Hotel Cartagena un destino turístico destacado.{" "}
+                    </p>
+
+                    <p>
+                        El clima subtropical húmedo, las altas montañas, la vegetación exótica, las interminables playas, los parques
+                        nacionales, la arquitectura histórica, los atractivos lugares de interés, los festivales de arte y el animado
+                        entorno multicultural hacen de Hotel Cartagena un destino turístico destacado.{" "}
+                    </p>
+                </div>
+
+                <div className="flex md:flex-row flex-col space-y-5 md:space-y-0 md:space-x-5">
+                    <div>
+                        <img className="rounded-md " src="/img/home/img-1.jpg" alt="" />
+                    </div>
+                    <div>
+                        <img className="rounded-md " src="/img/home/img-2.jpg" alt="" />
+                    </div>
+                </div>
+            </div>
+
+            <div className="container mx-auto  py-content space-y-8">
+                <div className="flex justify-between">
+                    <div>
+                        <TitleSection title="Habitaciones" subTitle="Habitaciones"></TitleSection>
+                    </div>
+                    <div className="flex items-end space-x-2 ">
+                        <a className="text-sm md:text-base " href="/">
+                            Ver toda
+                        </a>
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path
+                                fillRule="evenodd"
+                                d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+                                clipRule="evenodd"
+                            />
+                        </svg>
+                    </div>
+                </div>
+
+                <div className="grid-cols-1 grid md:grid-cols-3 gap-2 md:gap-5 ">
+                    {rooms.slice(0, 5).map((room, index) => (
+                        <div key={room.id} className={(index === 0 ? "md:col-span-2" : "") + " rounded-md overflow-hidden "}>
+                            <Link to={"/room/" + room.slug}>
+                                <div className="relative">
+                                    <img
+                                        src={"/storage/rooms/thumbnail/" + room.thumbnail}
+                                        className="object-cover h-64 w-full transition duration-500 transform hover:scale-110 filter brightness-75"
+                                        title={room.name + "-img"}
+                                        alt={room.name + "-img"}
+                                    />
+
+                                    <div className="text-white leading-tight space-y-1 py-4 px-4 absolute bottom-0 left-0">
+                                        <h3 className="font-semibold text-2xl font-title capitalize">{room.name}</h3>
+                                        <p className="text-xl font-light">
+                                            <span className="text-2xl font-semibold">${room.price}</span> /noche
+                                        </p>
+                                    </div>
+                                </div>
+                            </Link>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            <div className="bg-gray-100 py-content py-12">
+                <div className="container mx-auto  ">
+                    <div className="flex flex-col ">
+                        <div className="w-full z-10 space-y-8 pb-8 lg:pb-8">
+                            <div className="text-center lg:text-left">
+                                <TitleSection title="TESTIMONIOS" subTitle="Que dicen los clientes"></TitleSection>
+                                <span className="mt-1 block text-4xl md:text-5xl font-bold text-orange-600 leading-tight font-title">
+                                    sobre nosotros.
+                                </span>
+                            </div>
+                            <div className="flex justify-center lg:justify-start relative">
+                                <button className="button-next py-4 px-5 bg-white focus:outline-none ">
+                                    <ChevronLeftIcon className="h-5 w-5" />
+                                </button>
+                                <button className="button-prev py-4 px-5 bg-white focus:outline-none ">
+                                    <ChevronRightIcon className="h-5 w-5" />
+                                </button>
+                            </div>
+                        </div>
+                        <div className="w-full">
+                            <Swiper
+                                spaceBetween={20}
+                                slidesPerView={1}
+                                centeredSlides={true}
+                                autoHeight={true}
+                                autoplay={{
+                                    delay: 2500,
+                                    disableOnInteraction: false,
+                                }}
+                                navigation={{
+                                    nextEl: ".button-next",
+                                    prevEl: ".button-prev",
+                                }}
+                                breakpoints={{
+                                    640: {
+                                        slidesPerView: 1,
+                                        spaceBetween: 10,
+                                    },
+                                    768: {
+                                        slidesPerView: 2,
+                                        spaceBetween: 20,
+                                    },
+                                    1024: {
+                                        slidesPerView: 3,
+                                        spaceBetween: 20,
+                                    },
+                                }}
+                            >
+                                {testimonals.map((testimony, index) => (
+                                    <SwiperSlide key={index}>
+                                        <div key={index} className="w-full h-full  p-8 rounded-md  bg-white space-y-2 text-gray-500">
+                                            <h4 className=" text-2xl font-semibold font-title text-gray-500">{testimony.title}</h4>
+                                            <p className="">- {testimony.text}</p>
+                                            <div>
+                                                <span className=" font-semibold">{testimony.name}</span>
+                                            </div>
+                                        </div>
+                                    </SwiperSlide>
+                                ))}
+                            </Swiper>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="container py-content  py-24 mx-auto max-w-screen-md text-center space-y-8">
+                <h3 className="text-2xl md:text-5xl md:leading-tight font-bold font-title ">Haz espacio para la aventura.</h3>
+                <p className="font-light">
+                    Reserva tu habitación ahora mismo y comienza tu increíble aventura llena de descubrimientos. Y experiencias con el Hotel
+                    Cartagena.
+                </p>
+                <Link
+                    to="/reservation"
+                    className="px-10 py-4 justify-center rounded-full bg-orange-500 text-white flex md:inline-flex items-center  space-x-2 "
+                >
+                    <span className="font-bold">Reservación</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                </Link>
+            </div>
+        </>
+    )
+}
+
+export default HomePage
