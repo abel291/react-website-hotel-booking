@@ -1,10 +1,11 @@
 import BannerTitle from "../components/BannerTitle"
 import Head from "../components/Head"
+import LoadingPage from "../components/LoadingPage"
 import usePage from "../hooks/usePage"
 
 const PrivacyPolicyPage = () => {
     const { data } = usePage("page/privacy_policy")
-    if (!data) return <div>loading...</div>
+    if (!data) return <LoadingPage/>
 
     return (
         <>

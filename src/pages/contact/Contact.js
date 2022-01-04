@@ -1,10 +1,11 @@
 import BannerTitle from "../../components/BannerTitle"
 import Head from "../../components/Head"
+import LoadingPage from "../../components/LoadingPage"
 import usePage from "../../hooks/usePage"
 
 const Contact = () => {
     const { data } = usePage("page/contact")
-    if (!data) return <div>loading...</div>
+    if (!data) return <LoadingPage/>
     return (
         <>
             <Head title={data.page.seo_title} description={data.page.seo_description} />

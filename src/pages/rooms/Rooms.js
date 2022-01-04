@@ -3,6 +3,7 @@ import { Link, useHistory } from "react-router-dom"
 
 import BannerTitle from "../../components/BannerTitle"
 import Head from "../../components/Head"
+import LoadingPage from "../../components/LoadingPage"
 import usePage from "../../hooks/usePage"
 import AppLayout from "../AppLayout"
 
@@ -14,7 +15,7 @@ const Rooms = () => {
         e.preventDefault()
         history.push("/reservation")
     }
-    if (!data) return <div>loading...</div>
+    if (!data) return <LoadingPage/>
 
     return (
         <>

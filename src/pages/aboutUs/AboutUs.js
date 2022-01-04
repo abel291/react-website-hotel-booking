@@ -6,9 +6,10 @@ import BannerTitle from "../../components/BannerTitle"
 import { Link } from "react-router-dom"
 import Head from "../../components/Head"
 import usePage from "../../hooks/usePage"
+import LoadingPage from "../../components/LoadingPage"
 const AboutUs = () => {
     const { data } = usePage("page/about-us")
-    if (!data) return <div>loading...</div>
+    if (!data) return <LoadingPage/>
     const images = [
         {
             image: "about-1.jpg",

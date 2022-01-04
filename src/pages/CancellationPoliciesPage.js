@@ -1,10 +1,11 @@
 import BannerTitle from "../components/BannerTitle"
 import Head from "../components/Head"
+import LoadingPage from "../components/LoadingPage"
 import usePage from "../hooks/usePage"
 
 const CancellationPoliciesPage = () => {
     const { data } = usePage("page/cookies_policy")
-    if (!data) return <div>loading...</div>
+    if (!data) return <LoadingPage/>
     return (
         <>
             <Head title={data.page.seo_title} description={data.page.seo_description} />

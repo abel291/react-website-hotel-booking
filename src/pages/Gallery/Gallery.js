@@ -6,6 +6,7 @@ import FsLightbox from "fslightbox-react"
 import BannerTitle from "../../components/BannerTitle"
 import GalleriesPageLoading from "./GalleriesPageLoading"
 import usePage from "../../hooks/usePage"
+import LoadingPage from "../../components/LoadingPage"
 
 const Gallery = () => {
     const { data } = usePage("page/gallery")
@@ -50,7 +51,7 @@ const Gallery = () => {
         })
     }
 
-    if (!data) return <div>loading...</div>
+    if (!data) return <LoadingPage/>
 
     return (
         <>
@@ -67,16 +68,11 @@ const Gallery = () => {
                 ) : (
                     <>
                         <div className="filter-images  flex flex-col sm:flex-row  text-lg space-x-0 sm:space-x-6">
-                            <button
-                                className="img-filter font-bold py-2 focus:outline-none capitalize"
-                                data-filter="*"
-                                //onClick={handleClickFilterImg}
-                            >
+                            <button className="img-filter font-bold py-2 focus:outline-none capitalize" data-filter="*">
                                 Todas
                             </button>
                             {data.galleries.map((gallery, index) => (
                                 <button
-                                    //onClick={handleClickFilterImg}
                                     key={index}
                                     data-filter={".data-" + gallery.slug}
                                     className="filter-images hover:cursor-pointer img-filter font-bold py-2  focus:outline-none capitalize"

@@ -8,10 +8,11 @@ import CarouselGallery from "../../components/CarouselGallery"
 import BannerTitle from "../../components/BannerTitle"
 import usePage from "../../hooks/usePage"
 import Head from "../../components/Head"
+import LoadingPage from "../../components/LoadingPage"
 const Room = () => {
     const { slug } = useParams()
     const { data } = usePage("room/" + slug)
-    if (!data) return <div>loading...</div>
+    if (!data) return <LoadingPage/>
 
     return (
         //<Compoenent />

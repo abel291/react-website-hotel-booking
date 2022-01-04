@@ -2,7 +2,7 @@ import { Swiper, SwiperSlide } from "swiper/react"
 import SwiperCore, { Navigation, Autoplay } from "swiper"
 import "swiper/swiper-bundle.css"
 SwiperCore.use([Navigation, Autoplay])
-const CarouselGallery = ({images,path ,height='500px'}) => {
+const CarouselGallery = ({images ,height='500px'}) => {
     return (
         <div className="relative bg-gray-50">
                 <div className="z-10 absolute top-0 left-0  flex justify-center ">
@@ -36,7 +36,7 @@ const CarouselGallery = ({images,path ,height='500px'}) => {
                                 <img 
                                     //className="object-cover w-full mx-auto"
                                     className=" h-full mx-auto object-cover w-full"
-                                    src={path+image.image}
+                                    src={image.image}
                                     alt={image.image}
                                     style={{ height: height }}
                                 />

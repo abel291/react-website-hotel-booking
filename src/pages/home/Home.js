@@ -9,6 +9,7 @@ import { Link } from "react-router-dom"
 import InputReservation from "./InputReservation"
 import usePage from "../../hooks/usePage"
 import Head from "../../components/Head"
+import LoadingPage from "../../components/LoadingPage"
 const testimonals = [
     {
         title: "¡El mejor hotel! ",
@@ -45,7 +46,7 @@ const testimonals = [
 SwiperCore.use([Navigation, Autoplay])
 const Home = () => {
     const { data } = usePage("page/home")
-    if (!data) return <div>loading...</div>
+    if (!data) return <LoadingPage/>
     return (
         <>  
             <Head title={data.page.seo_title} description={data.page.seo_description} />

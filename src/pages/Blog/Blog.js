@@ -4,6 +4,7 @@ import { Link, useHistory } from "react-router-dom"
 //import apiClient from "../../auth/apiClient"
 import BannerTitle from "../../components/BannerTitle"
 import Head from "../../components/Head"
+import LoadingPage from "../../components/LoadingPage"
 import Pagination from "../../components/Pagination"
 import usePage from "../../hooks/usePage"
 
@@ -18,7 +19,7 @@ const Blog = () => {
     const [pageIndex, setPageIndex] = useState(new URLSearchParams(location.search).get("page") || 1)
     const { data: posts } = usePage("/page/posts?page=" + pageIndex)
 
-    if (!data) return <div>loading...</div>
+    if (!data) return <LoadingPage/>
 
     return (
         <>  
