@@ -1,22 +1,18 @@
-import { useEffect } from "react"
-import { useRef } from "react"
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
+
 import Isotope from "isotope-layout"
 import imagesLoaded from "imagesloaded"
 import FsLightbox from "fslightbox-react"
 import BannerTitle from "../../components/BannerTitle"
 import GalleriesPageLoading from "./GalleriesPageLoading"
-import { useStore } from "../../context/StoreContext"
-//import apiClient from "../../auth/apiClient"
-import galleriesJson from "../../dataJson/galleries.json"
+import usePage from "../../hooks/usePage"
 
-const GalleryPage = () => {
-    const { pages, dispatch, galleries,fakeApi } = useStore()
-    const page = pages.gallery
+const Gallery = () => {
+    const { data } = usePage("page/gallery")
     const textLoadedRef = useRef()
 
     useEffect(() => {
-        if (galleries) {
+        if (data) {
             const galleryIso = document.getElementById("gallery-img")
             textLoadedRef.current.innerText = "Cargandooo..."
             imagesLoaded(galleryIso, function () {
@@ -32,7 +28,6 @@ const GalleryPage = () => {
                             return
                         }
                         let filter_data = e.target.getAttribute("data-filter")
-                        console.log(filter_data)
                         iso.arrange({ filter: filter_data })
                         //refreshFsLightbox()
                     })
@@ -41,7 +36,7 @@ const GalleryPage = () => {
                 textLoadedRef.current.innerText = ""
             })
         }
-    }, [galleries])
+    }, [data])
 
     const [lightboxController, setLightboxController] = useState({
         toggler: false,
@@ -55,28 +50,11 @@ const GalleryPage = () => {
         })
     }
 
-    useEffect(() => {
-        fakeApi(() => {
-            dispatch({ type: "SET_GALLERIES", value: galleriesJson })
-            
-        })
-
-        // if (!galleries) {
-        //     apiClient
-        //         .get("/api/galleries")
-        //         .then((response) => {
-        //             let galleries = response.data.galleries
-        //             let images = response.data.images
-        //             dispatch({ type: "SET_GALLERIES", value: { galleries, images } })
-        //         })
-        //         .catch(() => {})
-        //         .then(() => {})
-        // }
-    }, [fakeApi,dispatch])
+    if (!data) return <div>loading...</div>
 
     return (
         <>
-            <BannerTitle title={page.title} subTitle={page.sub_title} img={null} />
+            <BannerTitle title={data.page.title} subTitle={data.page.sub_title} img={null} />
             <div className="container mx-auto max-w-screen-xl space-y-8 pb-content">
                 <div>
                     <p className="w-full md:w-2/4 text-gray-600">
@@ -84,7 +62,7 @@ const GalleryPage = () => {
                         playa soleada y las aventuras activas.
                     </p>
                 </div>
-                {!galleries ? (
+                {!data ? (
                     <GalleriesPageLoading />
                 ) : (
                     <>
@@ -96,10 +74,10 @@ const GalleryPage = () => {
                             >
                                 Todas
                             </button>
-                            {galleries.galleries.map((gallery) => (
+                            {data.galleries.map((gallery, index) => (
                                 <button
                                     //onClick={handleClickFilterImg}
-                                    key={gallery.id}
+                                    key={index}
                                     data-filter={".data-" + gallery.slug}
                                     className="filter-images hover:cursor-pointer img-filter font-bold py-2  focus:outline-none capitalize"
                                 >
@@ -110,18 +88,14 @@ const GalleryPage = () => {
                         <div>
                             <div ref={textLoadedRef}></div>
                             <div id="gallery-img">
-                                {galleries.images.map((image, index) => (
+                                {data.images.map((image, index) => (
                                     <div
-                                        key={image.id}
+                                        key={index}
                                         className={"img-item w-full md:w-2/4 lg:w-1/3 p-2 data-" + image.slug}
                                         onClick={() => openLightboxOnSlide(index)}
                                     >
                                         <div className="overflow-hidden">
-                                            <img
-                                                src={"/storage/images/thumbnail/" + image.image}
-                                                className=" cursor-pointer rounded-md w-full"
-                                                alt={image.image}
-                                            />
+                                            <img src={image.image} className=" cursor-pointer rounded-md w-full" alt={image.image} />
                                         </div>
                                     </div>
                                 ))}
@@ -130,7 +104,7 @@ const GalleryPage = () => {
 
                         <FsLightbox
                             toggler={lightboxController.toggler}
-                            sources={galleries.images.map((image) => "/storage/images/" + image.image)}
+                            sources={data.images.map((image) => image.image)}
                             slide={lightboxController.slide}
                         />
                     </>
@@ -140,4 +114,4 @@ const GalleryPage = () => {
     )
 }
 
-export default GalleryPage
+export default Gallery

@@ -1,10 +1,12 @@
 
 import {  useHistory } from "react-router-dom"
 
-const Pagination = ({ paginator }) => {
+const Pagination = ({ paginator,setPageIndex,scrollTopId="root" }) => {
     const history = useHistory()
     const handleClickPage = (nextPage) => {
         history.push({ search: "?page=" + nextPage, state: { page: nextPage } })
+        setPageIndex(nextPage)
+        document.getElementById(scrollTopId).scrollIntoView({ behavior: "smooth" })
     }
     return (
         <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">

@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom"
+import routes from "../routes"
 
 export default function Footer() {
     return (
@@ -13,11 +14,11 @@ export default function Footer() {
                     </div>
 
                     <div className="space-y-1 flex flex-col  md:flex-row md:space-x-6 md:space-y-0 md:justify-center text-sm lg:text-base">
-                        <Link to="/terms_conditions">Termino y condiciones</Link>
-                        <Link to="/privacy_policy">Politicas de Privacidad</Link>
-                        <Link to="/cancellation_policies">Politicas de cancelacion</Link>
+                        <Link to={routes.termsConditions.path}>Termino y condiciones</Link>
+                        <Link to={routes.privacyPolicy.path}>Politicas de Privacidad</Link>
+                        <Link to={routes.cookiesPolicy.path}>Política de Cookies</Link>
+                        <Link to={routes.cancellationPolicies.path}>Politicas de cancelacion</Link>
                         {/* <Link to="/">Cancelacion de reserva</Link> */}
-                        <Link to="/cookies_policy">Política de Cookies</Link>
                     </div>
 
                     <div className="text-center">

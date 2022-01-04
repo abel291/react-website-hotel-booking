@@ -1,24 +1,23 @@
 import { MenuIcon, XIcon } from "@heroicons/react/outline"
 import { BookmarkIcon } from "@heroicons/react/solid"
-import { useEffect } from "react"
-import { useState } from "react"
-import { NavLink, useLocation } from "react-router-dom"
+import {  useState } from "react"
+import { NavLink } from "react-router-dom"
+import routes from "../routes"
+import useSWR from "swr"
+const routeNavBar = [
+    { ...routes.rooms, title: "Habitaciones" },
+    { ...routes.gallery, title: "Galeria" },
+    { ...routes.about, title: "Nosotros" },
+    { ...routes.blog, title: "Blog" },
+    { ...routes.contact, title: "Contacto" },
+]
 
-import { useStore } from "../context/StoreContext"
-
-export default function Header({ routes }) {
+export default function Header() {
     const [open, setOpen] = useState(false)
-    const { navbar, dispatch } = useStore()
-
-    const location = useLocation()
-
-    useEffect(() => {
-        let styleNavbar = routes.find((route) => route.path === location.pathname)
-
-        if (styleNavbar) {
-            dispatch({ type: "CHANGE_NAVBAR", value: styleNavbar.header })
-        }
-    }, [location.pathname, dispatch, routes])
+    const { data: navbar } = useSWR("navbar", () => "white", {        
+        revalidateOnFocus: false,
+        revalidateOnReconnect: false,
+    })
 
     return (
         // <nav className="bg-orange-500 lg:bg-transparent text-white lg:text-gray-600 z-50">
@@ -30,7 +29,7 @@ export default function Header({ routes }) {
             }
         >
             <div className={(open ? "text-gray-600" : "") + " px-5 py-4 text-lg flex items-center justify-between lg:hidden"}>
-                <NavLink onClick={() => setOpen(false)} exact to="/" className=" text-xl lg:text-2xl font-bold ">
+                <NavLink onClick={() => setOpen(false)} exact to={routes.home.path} className=" text-xl lg:text-2xl font-bold ">
                     <div className=" leading-6">
                         Hotel <br /> Cartagena
                     </div>
@@ -48,79 +47,30 @@ export default function Header({ routes }) {
                         (navbar === "white" && "absolute inset-x-0 lg:static bg-white lg:bg-transparent")
                     }
                 >
-                    <NavLink onClick={() => setOpen(false)} exact to="/" className="text-xl lg:text-2xl font-bold hidden lg:block">
-                        <div className=" leading-6">
+                    <NavLink
+                        onClick={() => setOpen(false)}
+                        exact
+                        to={routes.home.path}
+                        className="text-xl lg:text-2xl font-bold hidden lg:block"
+                    >
+                        <div className="leading-6">
                             Hotel <br /> Cartagena
                         </div>
                     </NavLink>
                     <div className=" flex flex-col space-y-1 lg:space-y-0 lg:flex-row flex-grow justify-center lg:items-center lg:space-x-4 ">
-                        <NavLink
-                            activeClassName="bg-gray-200 lg:bg-transparent lg:border-b-2 border-gray-600"
-                            onClick={() => setOpen(false)}
-                            to="/rooms"
-                            className="px-3 lg:px-0 py-2 lg:py-1 rounded-md lg:rounded-none"
-                        >
-                            Habitaciones
-                        </NavLink>
-                        <NavLink
-                            activeClassName="bg-gray-200 lg:bg-transparent lg:border-b-2 border-gray-600"
-                            onClick={() => setOpen(false)}
-                            to="/gallery"
-                            className="px-3 lg:px-0 py-2 lg:py-1 rounded-md lg:rounded-none "
-                        >
-                            Galleria
-                        </NavLink>
-                        <NavLink
-                            activeClassName="bg-gray-200 lg:bg-transparent lg:border-b-2 border-gray-600"
-                            onClick={() => setOpen(false)}
-                            to="/about-us"
-                            className="px-3 lg:px-0 py-2 lg:py-1 rounded-md lg:rounded-none "
-                        >
-                            Nosotros
-                        </NavLink>
-                        <NavLink
-                            activeClassName="bg-gray-200 lg:bg-transparent lg:border-b-2 border-gray-600"
-                            onClick={() => setOpen(false)}
-                            to="/blog"
-                            className="px-3 lg:px-0 py-2 lg:py-1 rounded-md lg:rounded-none "
-                        >
-                            Blog
-                        </NavLink>
-                        <NavLink
-                            activeClassName="bg-gray-200 lg:bg-transparent lg:border-b-2 border-gray-600"
-                            onClick={() => setOpen(false)}
-                            to="/contact-us"
-                            className="px-3 lg:px-0 py-2 lg:py-1 rounded-md lg:rounded-none "
-                        >
-                            Contactos
-                        </NavLink>
+                        {routeNavBar.map((route, index) => (
+                            <NavLink
+                                key={index}
+                                activeClassName="bg-gray-200 lg:bg-transparent lg:border-b-2 border-gray-600"
+                                onClick={() => setOpen(false)}
+                                to={route.path}
+                                className="px-3 lg:px-0 py-2 lg:py-1 rounded-md lg:rounded-none"
+                            >
+                                {route.title}
+                            </NavLink>
+                        ))}
                     </div>
                     <div className="mt-1 lg:mt-0 ">
-                        {/* {isLogged ? (
-                            <div className="flex items-center justify-between">
-                                <span>{user.name}</span>
-                                <button
-                                    onClick={() => {
-                                        auth.logout(() => history.push("/login"))
-                                        setOpen(false)
-                                    }}
-                                    className="px-2 py-2  lg:px-3 rounded-md "
-                                >
-                                    Salir
-                                </button>
-                            </div>
-                        ) : (
-                            <div className="flex items-center justify-center lg:justify-end">
-                                <NavLink
-                                    activeClassName="bg-gray-200 lg:bg-transparent "
-                                    onClick={() => setOpen(false)}
-                                    to="/login"
-                                    className="px-3 py-2 lg:py-2 lg:px-2 rounded-md"
-                                >
-                                    Acceeder
-                                </NavLink>
-                            </div>
-                        )} */}
                         <NavLink
                             onClick={() => setOpen(false)}
                             activeClassName="bg-gray-200 "

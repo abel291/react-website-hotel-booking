@@ -1,7 +1,11 @@
-
+import { useEffect } from "react"
+import { useSWRConfig } from "swr"
 
 const BannerTitle = ({ title, subTitle, img }) => {
-    
+    const { mutate } = useSWRConfig()
+    useEffect(() => {
+        mutate("navbar", img ? "img" : "white",false)
+    }, [img])
     return (
         <>
             {img ? (

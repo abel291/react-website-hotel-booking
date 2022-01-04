@@ -1,20 +1,24 @@
-import { Link,useHistory } from "react-router-dom"
+import { MetaTags } from "react-meta-tags"
+import { Link, useHistory } from "react-router-dom"
 
-import { useStore } from "../context/StoreContext"
-import BannerTitle from "../components/BannerTitle"
+import BannerTitle from "../../components/BannerTitle"
+import Head from "../../components/Head"
+import usePage from "../../hooks/usePage"
+import AppLayout from "../AppLayout"
 
-const RoomsPage = () => {
-    const { pages,rooms} = useStore()
-    const page = pages.rooms
-    const history=useHistory()
+const Rooms = () => {
+    const { data } = usePage("page/rooms")
+    const history = useHistory()
 
-    const hanldeSumbit=(e)=>{
+    const hanldeSumbit = (e) => {
         e.preventDefault()
-        history.push('/reservation');
+        history.push("/reservation")
     }
-    
+    if (!data) return <div>loading...</div>
+
     return (
         <>
+            <Head title={data.page.seo_title} description={data.page.seo_description} />
             <div className="border-b border-gray-100">
                 <div className="container mx-auto max-w-screen-xl">
                     <form action="" onSubmit={hanldeSumbit} className="py-4  flex space-y-3 xl:space-y-0 flex-wrap ">
@@ -118,13 +122,13 @@ const RoomsPage = () => {
                     </form>
                 </div>
             </div>
-            <BannerTitle title={page.title} subTitle={page.sub_title} img={null} />
-            
+            <BannerTitle title={data.page.title} subTitle={data.page.sub_title} img={null} />
+
             <div className="container mx-auto pb-content ">
                 <div className="grid grid-cols-6 gap-5">
-                    {rooms.map((room, index) => (
+                    {data.rooms.map((room, index) => (
                         <div
-                            key={room.id}
+                            key={index}
                             className="col-span-6 md:col-span-3 lg:col-span-2 shadow hover:shadow-md transition-shadow duration-300 rounded-lg overflow-hidden "
                         >
                             <Link to={"room/" + room.slug}>
@@ -211,4 +215,4 @@ const RoomsPage = () => {
     )
 }
 
-export default RoomsPage
+export default Rooms

@@ -8,13 +8,13 @@ import apiPages from "../dataJson/pages"
 
 import storeReducer, { initialStore } from "./storeReducer.js"
 //import apiClient from "../auth/apiClient.js"
-import useAuth from "../hooks/useAuth"
+
 const StoreContext = createContext()
 
 export const StoreProvider = ({ children }) => {
     const [state, dispatch] = useReducer(storeReducer, initialStore)
 
-    const auth = useAuth(dispatch)
+    
 
     const fakeApi = async (fc) => {
         //dispatch({ type: "SET_LOADING", value: true })
@@ -71,8 +71,7 @@ export const StoreProvider = ({ children }) => {
         fakeApi,
         formatNumber,
 
-        //auth
-        auth, //login - register - logout - verifyAuthenticationError
+        
     }
 
     return (

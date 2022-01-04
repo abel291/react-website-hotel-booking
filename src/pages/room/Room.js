@@ -1,52 +1,37 @@
-import { useState } from "react"
 import { useParams } from "react-router-dom"
-
-import { useStore } from "../../context/StoreContext"
-
 import RoomSelectDescription from "./RoomSelectDescription"
 import RoomSelectComplements from "./RoomSelectComplements"
 import RoomSelectForm from "./RoomSelectForm"
 import RoomSelectPrice from "./RoomSelectPrice"
 import RoomSelectQuantity from "./RoomSelectQuantity"
-import { useEffect } from "react"
 import CarouselGallery from "../../components/CarouselGallery"
-
 import BannerTitle from "../../components/BannerTitle"
-
-const RoomSelectPage = () => {
+import usePage from "../../hooks/usePage"
+import Head from "../../components/Head"
+const Room = () => {
     const { slug } = useParams()
-    const { rooms ,dispatch} = useStore()
-    const [room, setRoom] = useState(null)
+    const { data } = usePage("room/" + slug)
+    if (!data) return <div>loading...</div>
 
-    useEffect(() => {
-        setRoom(rooms.find((room) => room.slug === slug))
-    }, [rooms,slug])
-
-    useEffect(() => {
-        dispatch({type:'CHANGE_NAVBAR',value:'img'}) 
-    }, [dispatch])
-
-
-    return !room ? (
-        "CARGANDO...."
+    return (
         //<Compoenent />
-    ) : (
         <>
-            <BannerTitle title={room.name} subTitle={"Habitacion"} img={"/storage/rooms/" + room.thumbnail} />
+            <Head title={data.room.name} description={data.room.description_min} />
+            <BannerTitle title={data.room.name} subTitle={"Habitacion"} img={"/storage/rooms/" + data.room.thumbnail} />
             <div className="container mx-auto max-w-screen-xl bg-white rounded-t-2xl   md:rounded-none py-content">
                 <div className="flex flex-col lg:flex-row ">
                     <div className="w-full lg:w-2/3 space-y-8 lg:mr-4 mb-8 lg-mb-0">
-                        {room.images && <CarouselGallery images={room.images} path={"/storage/images/"} />}
+                        {data.room.images && <CarouselGallery images={data.room.images} path={"/storage/images/"} />}
 
-                        <RoomSelectQuantity room={room} />
+                        <RoomSelectQuantity room={data.room} />
 
-                        <RoomSelectDescription room={room} />
+                        <RoomSelectDescription room={data.room} />
 
-                        <RoomSelectComplements room={room} />
+                        <RoomSelectComplements room={data.room} />
                     </div>
 
                     <div className="w-full lg:w-1/3 space-y-8 ">
-                        <RoomSelectPrice room={room} />
+                        <RoomSelectPrice room={data.room} />
 
                         <div className="px-2">
                             <div className="font-bold text-2xl font-title mb-3">Buscar Habitacion</div>
@@ -61,4 +46,4 @@ const RoomSelectPage = () => {
     )
 }
 
-export default RoomSelectPage
+export default Room

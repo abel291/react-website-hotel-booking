@@ -1,14 +1,14 @@
-
 import BannerTitle from "../../components/BannerTitle"
-import { useStore } from "../../context/StoreContext"
+import Head from "../../components/Head"
+import usePage from "../../hooks/usePage"
 
-const ContactPage = () => {
-    const { pages } = useStore()
-    const page = pages.contact
-    
+const Contact = () => {
+    const { data } = usePage("page/contact")
+    if (!data) return <div>loading...</div>
     return (
-        <>  
-            <BannerTitle title={page.title} subTitle={page.sub_title} img={null} />
+        <>
+            <Head title={data.page.seo_title} description={data.page.seo_description} />
+            <BannerTitle title={data.page.title} subTitle={data.page.sub_title} img={null} />
             <div className="container mx-auto max-w-screen-xl ">
                 <div className="flex flex-col sm:flex-row sm:space-x-24 space-y-4 sm:space-y-0">
                     <div>
@@ -34,7 +34,6 @@ const ContactPage = () => {
                     </div>
                 </div>
             </div>
-
             <div className="py-content filter grayscale">
                 <iframe
                     className="w-full"
@@ -48,7 +47,6 @@ const ContactPage = () => {
                     aria-label="London Eye, London, United Kingdom"
                 ></iframe>
             </div>
-
             <div className="container mx-auto max-w-screen-md py-content  text-center">
                 <h4 className="text-2xl md:text-4xl pb-5 font-bold font-title ">Solo una forma. Es fácil.</h4>
                 <form className="space-y-3">
@@ -58,14 +56,12 @@ const ContactPage = () => {
 
                     <textarea rows="5" className="form-input form-input-border-normal" placeholder="Comentario"></textarea>
                     <button className="px-4 py-2 justify-center  md:px-6 rounded-full text-white bg-orange-500 flex md:inline-flex items-center font-bold">
-                    Enviar mensaje
-                </button>
+                        Enviar mensaje
+                    </button>
                 </form>
-
-                
             </div>
         </>
     )
 }
 
-export default ContactPage
+export default Contact

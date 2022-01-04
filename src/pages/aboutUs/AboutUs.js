@@ -4,9 +4,11 @@ import { useStore } from "../../context/StoreContext"
 import CarouselGallery from "../../components/CarouselGallery"
 import BannerTitle from "../../components/BannerTitle"
 import { Link } from "react-router-dom"
-const AboutUsPage = () => {
-    const { pages, dispatch } = useStore()
-    const page = pages.about_us
+import Head from "../../components/Head"
+import usePage from "../../hooks/usePage"
+const AboutUs = () => {
+    const { data } = usePage("page/about-us")
+    if (!data) return <div>loading...</div>
     const images = [
         {
             image: "about-1.jpg",
@@ -56,13 +58,11 @@ const AboutUsPage = () => {
             position: "ANIMATOR",
         },
     ]
-    useEffect(() => {
-        dispatch({ type: "CHANGE_NAVBAR", value: "white" })
-    }, [dispatch])
 
     return (
         <>
-            <BannerTitle title={page.title} subTitle={page.sub_title} img={null} />
+            <Head title={data.page.seo_title} description={data.page.seo_description} />
+            <BannerTitle title={data.page.title} subTitle={data.page.sub_title} img={null} />
             <div className="container mx-auto max-w-screen-xl">
                 <div className="pb-content">
                     <div className=" max-w-md flex flex-col md:flex-row md:items-center justify-between pb-14 space-y-4 md:space-y-0 md:space-x-5">
@@ -208,4 +208,4 @@ const AboutUsPage = () => {
     )
 }
 
-export default AboutUsPage
+export default AboutUs
