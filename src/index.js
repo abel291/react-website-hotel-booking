@@ -4,8 +4,6 @@ import "./index.css"
 
 import { BrowserRouter as Router } from "react-router-dom"
 
-import { StoreProvider } from "./context/StoreContext"
-
 import App from "./App"
 
 ReactDOM.render(

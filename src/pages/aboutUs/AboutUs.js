@@ -1,6 +1,5 @@
-import { useEffect } from "react"
 import TitleSection from "../../components/TitleSection"
-import { useStore } from "../../context/StoreContext"
+
 import CarouselGallery from "../../components/CarouselGallery"
 import BannerTitle from "../../components/BannerTitle"
 import { Link } from "react-router-dom"
@@ -9,7 +8,7 @@ import usePage from "../../hooks/usePage"
 import LoadingPage from "../../components/LoadingPage"
 const AboutUs = () => {
     const { data } = usePage("page/about-us")
-    if (!data) return <LoadingPage/>
+    if (!data) return <LoadingPage />
     const images = [
         {
             image: "about-1.jpg",

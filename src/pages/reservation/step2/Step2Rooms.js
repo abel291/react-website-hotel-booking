@@ -1,21 +1,20 @@
 import React from "react"
-import { useReservation } from "../context/ReservationContext"
-import { useStore } from "../context/StoreContext"
+import { formatCurrency } from "../../../helpers/helpers"
+import useReservation from "../../../hooks/useReservation"
 
 export default function Step2Rooms() {
-    const{formatNumber} = useStore()
-    const{data, updateData } = useReservation()
+    const { data, updateData } = useReservation()
 
     const handleSelectRoom = (idRoom) => {
         let roomQuantity = document.getElementById("room_select_quantity_" + idRoom).value
         let roomSelected = data.rooms.find((x) => x.id === idRoom)
         let complements = roomSelected.complements
-        let complementsIds = []
+        //let complementsIds = []
 
         updateData("roomQuantity", parseInt(roomQuantity))
         updateData("roomSelected", roomSelected)
         updateData("complements", complements)
-        updateData("complementsIds", complementsIds)
+        //updateData("complementsIds", [])
         updateData("step", 3)
     }
 
@@ -25,7 +24,7 @@ export default function Step2Rooms() {
                 <h2 className="text-2xl font-semibold font-title ">Elija las Habitaciones</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-3 gap-4">
                     {data.rooms.map((room) => (
-                        <div key={room.id} className="shadow  rounded-lg overflow-hidden">
+                        <div key={room.id} className="shadow rounded-lg overflow-hidden">
                             <div className="relative overflow-hidden">
                                 <img
                                     src={"/img/rooms/thumbnail/" + room.thumbnail}
@@ -36,7 +35,7 @@ export default function Step2Rooms() {
                                 <div className="text-white leading-tight space-y-1 py-4 px-4 absolute bottom-0 left-0">
                                     <h3 className="font-semibold text-xl">{room.name}</h3>
                                     <p className="text-xl font-light">
-                                        <span className="text-2xl font-semibold">{formatNumber(room.price)}</span>
+                                        <span className="text-2xl font-semibold">{formatCurrency(room.price)}</span>
 
                                         <span className="text-base">/ noche</span>
                                     </p>
@@ -54,12 +53,12 @@ export default function Step2Rooms() {
                                     <select
                                         defaultValue={data.roomSelected.id === room.id ? data.roomQuantity : 1}
                                         id={"room_select_quantity_" + room.id}
-                                        className="block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                                        className="w-full mt-1"
                                     >
-                                        {room.price_per_quantity_room_selected &&
-                                            room.price_per_quantity_room_selected.map((price, i) => (
+                                        {room.price_per_quantity &&
+                                            room.price_per_quantity.map((price, i) => (
                                                 <option key={room.id + "-" + i} className="" value={i + 1}>
-                                                    {i + 1 + " - " + formatNumber(price)}
+                                                    {i + 1 + " - " + formatCurrency(price)}
                                                 </option>
                                             ))}
                                     </select>

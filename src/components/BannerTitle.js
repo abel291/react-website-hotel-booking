@@ -5,7 +5,7 @@ const BannerTitle = ({ title, subTitle, img }) => {
     const { mutate } = useSWRConfig()
     useEffect(() => {
         mutate("navbar", img ? "img" : "white",false)
-    }, [img])
+    }, [img,mutate])
     return (
         <>
             {img ? (

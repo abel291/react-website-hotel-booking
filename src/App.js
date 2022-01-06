@@ -1,9 +1,9 @@
 import { Route, Switch } from "react-router"
 import { SWRConfig } from "swr"
-import apiClient from "./auth/apiClient"
+import apiClient from "./helpers/apiClient"
 import Footer from "./components/Footer"
 import Header from "./components/Header"
-import AppLayout from "./pages/AppLayout"
+
 import routes from "./routes"
 
 const App = () => {

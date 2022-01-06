@@ -3,11 +3,10 @@ import React from "react"
 import { CheckCircleIcon } from "@heroicons/react/solid"
 import TableData from "./TableData"
 import { useReservation } from "../context/ReservationContext"
-import { useStore } from "../context/StoreContext"
+import { formatCurrency } from "../../helpers/helpers"
 
-export default function Step5Complete() {
+export default function Step5Complete() {   
     
-    const { formatNumber } = useStore()
     const {data,handleResetData} =useReservation()
 
     
@@ -36,7 +35,7 @@ export default function Step5Complete() {
                         </div>
                         <div className="w-1/2 md:w-auto md:px-5 mb-2 md:mb-0">
                             <span className=" uppercase text-xs ">total</span>
-                            <div className=" font-semibold ">{formatNumber(data.totalPrice)}</div>
+                            <div className=" font-semibold ">{formatCurrency(data.totalPrice)}</div>
                         </div>
                         <div className="w-1/2 md:w-auto md:px-5 mb-2 md:mb-0">
                             <span className=" uppercase text-xs ">metodo de pago</span>
@@ -47,12 +46,12 @@ export default function Step5Complete() {
 
                 <div className="space-y-4 ">
                     <h2 className="text-xl font-semibold font-title mb-4  ">Resumen de pedido</h2>
-                    <TableData data={data} formatNumber={formatNumber} />
+                    <TableData data={data} />
                 </div>
                 <div className="flex flex-col md:flex-row justify-end md:space-x-3 space-y-2 md:space-y-0">
-                    <button onClick={handleResetData} className="btn_back_step_reservation">
+                    {/* <button onClick={handleResetData} className="btn_back_step_reservation">
                         Volver al inicio
-                    </button>
+                    </button> */}
 
                     <a
                         className="w-full sm:w-auto btn_next_step_reservation"

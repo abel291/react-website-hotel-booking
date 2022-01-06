@@ -1,11 +1,9 @@
-import { MetaTags } from "react-meta-tags"
 import { Link, useHistory } from "react-router-dom"
 
 import BannerTitle from "../../components/BannerTitle"
 import Head from "../../components/Head"
 import LoadingPage from "../../components/LoadingPage"
 import usePage from "../../hooks/usePage"
-import AppLayout from "../AppLayout"
 
 const Rooms = () => {
     const { data } = usePage("page/rooms")
@@ -15,7 +13,7 @@ const Rooms = () => {
         e.preventDefault()
         history.push("/reservation")
     }
-    if (!data) return <LoadingPage/>
+    if (!data) return <LoadingPage />
 
     return (
         <>

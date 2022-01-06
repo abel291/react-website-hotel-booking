@@ -1,9 +1,8 @@
 import { createContext, useState, useContext } from "react"
 //import apiClient from "../auth/apiClient"
 //import ValidaterErrors from "../components/ValidaterErrors"
-import ReservationPage from "../pages/ReservationPage"
-import { useStore } from "./StoreContext"
-import reservationJson from "../dataJson/reservation.json"
+import apiClient from "../helpers/apiClient"
+import Reservation from "../pages/reservation/Reservation"
 const reservationContext = createContext()
 
 export function ProviderReservation({ children }) {
@@ -59,8 +58,6 @@ export function ProviderReservation({ children }) {
     }
 
     const [data, setData] = useState(dataInit())
-    const [errors, setErrors] = useState([])
-    //const [isLoading, setIsLoading] = useState(false)
 
     const updateData = (type, value) => {
         setData((prevData) => ({ ...prevData, [type]: value }))
@@ -69,15 +66,45 @@ export function ProviderReservation({ children }) {
     const handleResetData = () => {
         setData(dataInit)
     }
-    const {fakeApi}=useStore();
+    
+    const step1Fetch = async ({ setErrors, setLoading }) => {
+        setErrors([])
+        setLoading(true)
+        const response = await apiClient
+            .post("/reservation/step_1_date", {
+                start_date: data.startDate,
+                end_date: data.endDate,
+                adults: data.adults,
+                kids: data.kids,
+            })
+            .then((response) => {
+                setData({
+                    ...data,
+                    rooms: response.data.rooms,
+                    // night: response.data.night,
+                    // client: response.data.client,
+                    step: 2,
+                    // discountCodeExmaple: response.data.discount_code_exmaple,
+                })
+            })
+            .catch((error) => {
+                setErrors(formatErrors(error))
+            })
+            .then(() => setLoading(false))
+        return response
+    }
+    const formatErrors = ({ error }) => {
+        return error.response.status !== 422 ? ["algo salio mal"] : Object.values(error.response.data.errors).flat()
+    }
+
     const apiStep1 = async () => {
-        const response = await fakeApi(() => {
-            updateData("rooms", reservationJson.step1.rooms)
-            updateData("night", reservationJson.step1.night)
-            updateData("client", reservationJson.step1.client)
-            updateData("step", 2)
-            updateData("discountCodeExmaple", reservationJson.step1.discount_code_exmaple)
-        })
+        // const response = await fakeApi(() => {
+        //     updateData("rooms", reservationJson.step1.rooms)
+        //     updateData("night", reservationJson.step1.night)
+        //     updateData("client", reservationJson.step1.client)
+        //     updateData("step", 2)
+        //     updateData("discountCodeExmaple", reservationJson.step1.discount_code_exmaple)
+        // })
         // const response = await apiClient
         //     .post("/api/reservation/step_1_check_date", {
         //         start_date: data.startDate.toISOString().slice(0, 10), //format date 2020-12-12
@@ -97,21 +124,21 @@ export function ProviderReservation({ children }) {
         //         console.log(errorsMsg)
         //         setErrors(errorsMsg)
         //     })
-        return response
+        // return response
     }
     const apiStep3 = async (discountInput = null) => {
-        const response = await fakeApi(() => {
-            updateData("complementsSelect", reservationJson.step3.complements_cheked)
-            updateData("pricePorReservation", reservationJson.step3.price_per_reservation)
-            updateData("subTotalPrice", reservationJson.step3.sub_total_price)
-            updateData("totalPrice", reservationJson.step3.total_price)
-    
-            if (reservationJson.step3.discount) {
-                updateData("discount", reservationJson.step3.discount)
-            }
-            updateData("step", 4)
-        })
-        
+        // const response = await fakeApi(() => {
+        //     updateData("complementsSelect", reservationJson.step3.complements_cheked)
+        //     updateData("pricePorReservation", reservationJson.step3.price_per_reservation)
+        //     updateData("subTotalPrice", reservationJson.step3.sub_total_price)
+        //     updateData("totalPrice", reservationJson.step3.total_price)
+
+        //     if (reservationJson.step3.discount) {
+        //         updateData("discount", reservationJson.step3.discount)
+        //     }
+        //     updateData("step", 4)
+        // })
+
         // let dataRequest = {
         //     start_date: data.startDate.toISOString().slice(0, 10), //format date 2020-12-12
         //     end_date: data.endDate.toISOString().slice(0, 10),
@@ -147,16 +174,15 @@ export function ProviderReservation({ children }) {
         //         setErrors(msgErrors)
         //     })
 
-        return response
+        //return response
     }
 
     const apiStep4 = async (paymentMethod) => {
-
-        const response = await fakeApi(() => {
-            updateData("order", reservationJson.step4.order)
-            updateData("create_date", reservationJson.step4.create_date)
-            updateData("step", 5)
-        })
+        // const response = await fakeApi(() => {
+        //     updateData("order", reservationJson.step4.order)
+        //     updateData("create_date", reservationJson.step4.create_date)
+        //     updateData("step", 5)
+        // })
         // let dataRequest = {
         //     start_date: data.startDate.toISOString().slice(0, 10), //format date 2020-12-12
         //     end_date: data.endDate.toISOString().slice(0, 10),
@@ -187,23 +213,22 @@ export function ProviderReservation({ children }) {
         //         setErrors(msgErrors)
         //     })
 
-        return response
+        //return response
     }
 
     const context = {
         updateData,
-        data,
-        errors,
-        setErrors,
+        data,        
         handleResetData,
         apiStep1,
+        step1Fetch,
         apiStep3,
         apiStep4,
     }
 
     return (
         <reservationContext.Provider value={context}>
-            <ReservationPage />
+            <Reservation />
         </reservationContext.Provider>
     )
 }

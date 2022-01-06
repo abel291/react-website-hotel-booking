@@ -1,9 +1,9 @@
-import BannerTitle from "../components/BannerTitle"
-import Head from "../components/Head"
-import LoadingPage from "../components/LoadingPage"
-import usePage from "../hooks/usePage"
+import BannerTitle from "../../components/BannerTitle"
+import Head from "../../components/Head"
+import LoadingPage from "../../components/LoadingPage"
+import usePage from "../../hooks/usePage"
 
-const PrivacyPolicyPage = () => {
+const PrivacyPolicies = () => {
     const { data } = usePage("page/privacy_policy")
     if (!data) return <LoadingPage/>
 
@@ -97,4 +97,4 @@ const PrivacyPolicyPage = () => {
     )
 }
 
-export default PrivacyPolicyPage
+export default PrivacyPolicies

@@ -1,18 +1,15 @@
 import React from "react"
 
-import { useReservation } from "../context/ReservationContext"
-
-import { useStore } from "../context/StoreContext"
-
-
 import { useState } from "react"
-import TextLoadingSpinner from "../components/TextLoadingSpinner"
+import TextLoadingSpinner from "../../../components/TextLoadingSpinner"
+import { formatCurrency } from "../../../helpers/helpers"
+import useReservation from "../../../hooks/useReservation"
+
 //import { useEffect } from "react"
 export default function Step3Complements() {
-    const { formatNumber } = useStore()
-
-    const { data, updateData, setErrors, apiStep3 } = useReservation()
-    const [isLoading, setIsLoading] = useState(false)
+    const { data, updateData ,step3Fetch} = useReservation()
+    const [loading, setLoading] = useState(false)
+    const [errors, setErrors] = useState([])
     const handleChecked = (checked, idComplements) => {
         if (checked) {
             data.complementsIds.push(idComplements)
@@ -23,11 +20,8 @@ export default function Step3Complements() {
     }
     const handleNextStep = async (e) => {
         e.preventDefault()
-        setErrors([])
-        setIsLoading(true)
-        await apiStep3().then(function () {
-            setIsLoading(false)
-        })
+
+        await step3Fetch({ setErrors, setLoading })
     }
 
     return (
@@ -39,7 +33,7 @@ export default function Step3Complements() {
                     {data.roomSelected.complements.map((complement) => (
                         <div
                             key={data.roomSelected.id + "-" + complement.id}
-                            className="flex item-start shadow p-4 rounded space-x-3 bg-white border border-gray-50"
+                            className="flex item-start p-3 rounded space-x-3 bg-white border border-gray-200"
                         >
                             <div>
                                 <input
@@ -57,7 +51,7 @@ export default function Step3Complements() {
                                     <span className="font-bold ">{complement.name}</span>
                                     <p className="text-sm text-gray-400">{complement.description_min}</p>
                                     <div className="mt-3 ">
-                                        <span className="font-bold text-lg">{formatNumber(complement.price)}</span>
+                                        <span className="font-bold text-lg">{formatCurrency(complement.price)}</span>
                                         <span className="text-sm">
                                             {complement.type_price === "reservation" ? " por reservacion" : " por noche"}
                                         </span>
@@ -73,8 +67,13 @@ export default function Step3Complements() {
                         Volver
                     </button>
 
-                    <button onClick={handleNextStep} className="btn_next_step_reservation" disabled={isLoading}>
-                        <TextLoadingSpinner isLoading={isLoading} text="Confirmar Datos" textLoading="Calculando Monto..." />
+                    <button onClick={handleNextStep} className="btn_next_step_reservation" disabled={loading}>
+                        <TextLoadingSpinner
+                            className="h-5 w-5 text-gray-100"
+                            isLoading={loading}
+                            text="Confirmar Datos"
+                            textLoading="Verificando ..."
+                        />
                     </button>
                 </div>
             </div>

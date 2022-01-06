@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-import { Link, useHistory } from "react-router-dom"
+import {  useHistory } from "react-router-dom"
 //import apiClient from "../../auth/apiClient"
 import BannerTitle from "../../components/BannerTitle"
 import Head from "../../components/Head"

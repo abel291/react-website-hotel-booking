@@ -1,15 +1,17 @@
+import { ProviderReservation } from "./context/ReservationContext"
 import AboutUs from "./pages/aboutUs/AboutUs"
 import Blog from "./pages/blog/Blog"
 import PostPage from "./pages/blog/PostPage"
-import CancellationPoliciesPage from "./pages/CancellationPoliciesPage"
+import CancellationPolicies from "./pages/cancellationPolicies/CancellationPolicies"
 import Contac from "./pages/contact/Contact"
-import CookiesPolicyPage from "./pages/CookiesPolicyPage"
+import CookiePolicies from "./pages/cookiePolicies/CookiePolicies"
 import Gallery from "./pages/gallery/Gallery"
 import Home from "./pages/home/Home"
-import PrivacyPolicyPage from "./pages/PrivacyPolicyPage"
+import PrivacyPolicyPage from "./pages/privacyPolicies/PrivacyPolicies"
+import Reservation from "./pages/reservation/Reservation"
 import Room from "./pages/room/Room"
 import Rooms from "./pages/rooms/Rooms"
-import TermsConditionsPage from "./pages/TermsConditionsPage"
+import TermsConditionsPage from "./pages/termsConditions/TermsConditions"
 
 const routes = {
     home: { name: "home", path: "/", Component: Home },
@@ -22,9 +24,10 @@ const routes = {
     room: { name: "room", path: "/room/:slug", Component: Room },
     termsConditions: { name: "terms_conditions", path: "/terms-conditions", Component: TermsConditionsPage },
     privacyPolicy: { name: "privacy_policy", path: "/privacy-policy", Component: PrivacyPolicyPage },
-    cookiesPolicy: { name: "cookies_policy", path: "/cookies-policy", Component: CookiesPolicyPage },
-    cancellationPolicies: { name: "cancellation_policies", path: "/cancellation-policies", Component: CancellationPoliciesPage },
-    //{ navbar: "white", path: "/reservation", Component: ProviderReservation },
+    cookiesPolicy: { name: "cookies_policy", path: "/cookies-policy", Component: CookiePolicies },
+    cancellationPolicies: { name: "cancellation_policies", path: "/cancellation-policies", Component: CancellationPolicies },
+    reservation: { name: "reservation", path: "/reservation", Component: Reservation },
+    //reservation:{ navbar: "white", path: "/reservation", Component: ProviderReservation },
     //{ navbar: "white", path: "/*", Component: NoFoundPage },
 }
 

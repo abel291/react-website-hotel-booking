@@ -1,5 +1,6 @@
+import { formatCurrency } from "../../helpers/helpers";
 
-export default function TableData({ data, formatNumber,children},) {
+export default function TableData({ data,children},) {
     
     return (
         <div className=" text-sm bg-white border border-gray-200 rounded divide-y divide-gray-200 ">
@@ -36,7 +37,7 @@ export default function TableData({ data, formatNumber,children},) {
 
                 <div className="flex justify-between">
                     <span>Precio por noche</span>
-                    <span>{formatNumber(data.roomSelected.price)}</span>
+                    <span>{formatCurrency(data.roomSelected.price)}</span>
                 </div>
 
                 <div className="flex justify-between">
@@ -47,7 +48,7 @@ export default function TableData({ data, formatNumber,children},) {
                 {(data.night > 1 || data.roomQuantity > 1) && (
                     <div className="flex justify-between">
                         <span>Precio total por habitaciones</span>
-                        <span>{formatNumber(data.pricePorReservation)}</span>
+                        <span>{formatCurrency(data.pricePorReservation)}</span>
                     </div>
                 )}
             </div>
@@ -57,7 +58,7 @@ export default function TableData({ data, formatNumber,children},) {
                     {data.complementsSelect.map((com) => (
                         <div key={com.id} className="flex justify-between ">
                             <span className="">{com.name}</span>
-                            <span>{formatNumber(com.total_price)}</span>
+                            <span>{formatCurrency(com.total_price)}</span>
                         </div>
                     ))}
                 </div>
@@ -68,19 +69,19 @@ export default function TableData({ data, formatNumber,children},) {
 
                 <div className="flex justify-between">
                     <span className="text-gray-500">Sub-total</span>
-                    <span>{formatNumber(data.subTotalPrice)}</span>
+                    <span>{formatCurrency(data.subTotalPrice)}</span>
                 </div>
                 {data.discount && (
                     <div className="flex justify-between">
                         <span className="text-gray-500">Descuento {data.discount.percent + "%"}</span>
-                        <span>{formatNumber(-data.discount.amount)}</span>
+                        <span>{formatCurrency(-data.discount.amount)}</span>
                     </div>
                 )}
             </div>
             <div className="px-3 md:px-6 py-4 space-y-2">
                 <div className="flex justify-between font-bold text-lg">
                     <span className="">Total</span>
-                    <span>{formatNumber(data.totalPrice)}</span>
+                    <span>{formatCurrency(data.totalPrice)}</span>
                 </div>
             </div>
         </div>

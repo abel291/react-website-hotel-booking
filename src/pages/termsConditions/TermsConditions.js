@@ -1,9 +1,9 @@
-import BannerTitle from "../components/BannerTitle"
-import Head from "../components/Head"
-import LoadingPage from "../components/LoadingPage"
-import usePage from "../hooks/usePage"
+import BannerTitle from "../../components/BannerTitle"
+import Head from "../../components/Head"
+import LoadingPage from "../../components/LoadingPage"
+import usePage from "../../hooks/usePage"
 
-const TermsConditionsPage = () => {
+const TermsConditions = () => {
     const { data } = usePage("page/terms_conditions")
     if (!data) return <LoadingPage/>
     return (
@@ -96,4 +96,4 @@ const TermsConditionsPage = () => {
     )
 }
 
-export default TermsConditionsPage
+export default TermsConditions
