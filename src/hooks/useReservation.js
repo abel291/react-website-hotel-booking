@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 //import useSWR from "swr"
 import useSWRImmutable from "swr/immutable"
 import apiClient from "../helpers/apiClient"
@@ -57,6 +57,9 @@ const useReservation = () => {
     const updateData = (type, value) => {
         mutate((prevData) => ({ ...prevData, [type]: value }), false)
     }
+    const resetData =()=>{
+        mutate(dataInit,false)
+    }
 
     const step1Fetch = async ({ setErrors, setLoading }) => {
         setErrors([])
@@ -71,11 +74,10 @@ const useReservation = () => {
                 },
             })
             .then((response) => {
+                setLoading(false)
                 updateData("rooms", response.data.rooms)
-                // night: response.data.night,
-                // client: response.data.client,
+                updateData("night", response.data.night)
                 updateData("step", 2)
-                // discountCodeExmaple: response.data.discount_code_exmaple,
             })
             .catch((error) => {
                 setLoading(false)
@@ -101,6 +103,7 @@ const useReservation = () => {
                 },
             })
             .then((response) => {
+                setLoading(false)
                 updateData("complementsSelect", response.data.complements_cheked)
                 updateData("pricePorReservation", response.data.price_per_reservation)
                 updateData("subTotalPrice", response.data.sub_total_price)
@@ -110,23 +113,56 @@ const useReservation = () => {
                 }
                 updateData("client", response.data.client)
                 updateData("discountCodeExmaple", response.data.discount_code_exmaple)
-
                 updateData("step", 4)
             })
             .catch(function (error) {
+                setLoading(false)
                 updateData("totalPrice", data.subTotalPrice)
                 updateData("discount", null)
-                setLoading(false)
                 setErrors(formatErrors(error))
             })
     }
-    const step4Fetch = async ({ setErrors, setLoading, discountInput }) => {}
+    const step4Fetch = async ({ setErrors, setLoading,paymentMethod }) => {
+        setErrors([])
+        setLoading(true)
+        
+        let dataRequest = {
+            start_date: data.startDate.toISOString().slice(0, 10), //format date 2020-12-12
+            end_date: data.endDate.toISOString().slice(0, 10),
+            adults: data.adults,
+            kids: data.kids,
+            night: data.night,
+            room_id: data.roomSelected.id,
+            room_quantity: data.roomQuantity,
+            ids_complements_cheked: data.complementsIds,
+            methodpayment: paymentMethod.id,
+            client: data.client,
+            email_confirmation: data.client.email_confirmation,
+        }
+        if (data.discount) {
+            dataRequest["code"] = data.discount.code
+        }
+        await apiClient
+            .post("/reservation/step_4_finalize", {
+                ...dataRequest,
+            })
+            .then((response) => {
+                updateData("order", response.data.order)
+                updateData("create_date", response.data.create_date)
+                updateData("step", 5)
+            })
+            .catch(function (error) {
+                setErrors(formatErrors(error))
+                setLoading(false)
+            })
+        
+    }
 
     const formatErrors = (error) => {
         return error.response.status !== 422 ? ["algo salio mal"] : Object.values(error.response.data.errors).flat()
     }
 
-    return { data, updateData, step1Fetch, step3Fetch, step4Fetch }
+    return { data, updateData, step1Fetch, step3Fetch, step4Fetch,resetData }
 }
 
 export default useReservation

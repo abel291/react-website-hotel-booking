@@ -143,14 +143,14 @@ const Rooms = () => {
                                     >
                                         <h3 className=" text-xl font-title capitalize ">{room.name}</h3>
                                         <p>
-                                            <span className="text-2xl font-semibold">${room.price}.00</span>
+                                            <span className="text-2xl font-medium">${room.price}.00</span>
                                             <span className="text-base font-light">/ noche</span>
                                         </p>
                                     </div>
                                 </div>
 
                                 <div className="flex flex-wrap py-6 px-4 text-sm border-gray-200 md:border-none border space-x-4 overflow-hidden">
-                                    <div className="inline-flex items-center space-x-1 font-semibold">
+                                    <div className="inline-flex items-center space-x-1 font-medium">
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             className="h-5 w-5"
@@ -168,7 +168,7 @@ const Rooms = () => {
 
                                         <span>{room.beds} Camas</span>
                                     </div>
-                                    <div className="inline-flex items-center space-x-1 font-semibold">
+                                    <div className="inline-flex items-center space-x-1 font-medium">
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             className="h-5 w-5"
@@ -186,7 +186,7 @@ const Rooms = () => {
 
                                         <span>{room.adults} Adultos</span>
                                     </div>
-                                    <div className="inline-flex items-center space-x-1 font-semibold">
+                                    <div className="inline-flex items-center space-x-1 font-medium">
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             className="h-5 w-5"

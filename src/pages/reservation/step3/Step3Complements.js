@@ -2,14 +2,15 @@ import React from "react"
 
 import { useState } from "react"
 import TextLoadingSpinner from "../../../components/TextLoadingSpinner"
+import ValidationErrors from "../../../components/ValidationErrors"
 import { formatCurrency } from "../../../helpers/helpers"
 import useReservation from "../../../hooks/useReservation"
 
 //import { useEffect } from "react"
 export default function Step3Complements() {
-    const { data, updateData ,step3Fetch} = useReservation()
+    const { data, updateData, step3Fetch } = useReservation()
     const [loading, setLoading] = useState(false)
-    const [errors, setErrors] = useState([])
+    const [errors, setErrors] = useState([])  
     const handleChecked = (checked, idComplements) => {
         if (checked) {
             data.complementsIds.push(idComplements)
@@ -21,13 +22,14 @@ export default function Step3Complements() {
     const handleNextStep = async (e) => {
         e.preventDefault()
 
-        await step3Fetch({ setErrors, setLoading })
+        await step3Fetch({setErrors,setLoading })
     }
 
     return (
-        <>
+        <>  
+            <ValidationErrors errors={errors} />
             <div className="mx-auto max-w-5xl space-y-4 sm:space-y-8">
-                <h2 className="text-2xl font-semibold font-title ">Agregue complementos adicionale</h2>
+                <h2 className="text-2xl font-medium font-title ">Agregue complementos adicionale</h2>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {data.roomSelected.complements.map((complement) => (

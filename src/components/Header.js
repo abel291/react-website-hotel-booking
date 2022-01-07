@@ -1,9 +1,9 @@
 import { MenuIcon, XIcon } from "@heroicons/react/outline"
 import { BookmarkIcon } from "@heroicons/react/solid"
-import {  useState } from "react"
+import { useState } from "react"
 import { NavLink } from "react-router-dom"
 import routes from "../routes"
-import useSWR from "swr"
+import useSWRImmutable from "swr/immutable"
 const routeNavBar = [
     { ...routes.rooms, title: "Habitaciones" },
     { ...routes.gallery, title: "Galeria" },
@@ -14,10 +14,7 @@ const routeNavBar = [
 
 export default function Header() {
     const [open, setOpen] = useState(false)
-    const { data: navbar } = useSWR("navbar", () => "white", {        
-        revalidateOnFocus: false,
-        revalidateOnReconnect: false,
-    })
+    const { data: navbar } = useSWRImmutable("navbar", () => "white")
 
     return (
         // <nav className="bg-orange-500 lg:bg-transparent text-white lg:text-gray-600 z-50">

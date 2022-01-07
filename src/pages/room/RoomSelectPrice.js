@@ -11,7 +11,7 @@ const RoomSelectPrice = ({room}) => {
                 </div>
             </div>
             <div className="px-6 py-6 space-y-4 border border-gray-200">
-                <div className="flex items-center  space-x-8 font-semibold">
+                <div className="flex items-center  space-x-8 font-medium">
                     <span>Capacidad: {room.adults} </span>
                     <span>Niños: {room.kids}</span>
                 </div>

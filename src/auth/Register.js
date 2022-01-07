@@ -167,7 +167,7 @@ const Register = () => {
                     <div>
                         <button
                             type="submit"
-                            className="w-full font-semibold text-sm flex justify-center py-2 rounded-md text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
+                            className="w-full font-medium text-sm flex justify-center py-2 rounded-md text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
                         >
                             <TextLoadingSpinner isLoading={isLoading} text="Registrarse" textLoading={"Registrando...."} />
                         </button>

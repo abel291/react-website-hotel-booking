@@ -1,17 +1,17 @@
 import { Transition } from "@headlessui/react"
 
-import { XCircleIcon,XIcon } from '@heroicons/react/solid'
+import { XCircleIcon, XIcon } from "@heroicons/react/solid"
 import { useEffect, useState } from "react"
 
-export default function NotificationError({errors}) { 
+export default function NotificationError({ errors ,scroll=true }) {
     const [show, setShow] = useState(false)
-    
-    useEffect(()=>{
-        if(errors.length !== 0){
-            document.getElementById("root").scrollIntoView({ behavior: "smooth" })            
+
+    useEffect(() => {
+        if (errors.length !== 0 && scroll) {
+            document.getElementById("root").scrollIntoView({ behavior: "smooth" })
         }
-        setShow(errors.length !== 0)
-    },[errors])
+        setShow(errors.length > 0)
+    }, [errors])
     return (
         <Transition
             show={show}
@@ -24,21 +24,19 @@ export default function NotificationError({errors}) {
         >
             <div className="flex max-w-2xl mx-auto w-full bg-red-100 rounded-md p-4 text-sm my-4">
                 <div>
-                    <XCircleIcon className="h-5 w-5 text-red-500" />                      
+                    <XCircleIcon className="h-5 w-5 text-red-500" />
                 </div>
                 <div className="px-4 flex-grow">
-                    <span className="text-red-700 font-semibold">Tienes Errores por revisar </span>
+                    <span className="text-red-700 font-medium">Tienes Errores por revisar </span>
                     <ul className="list-disc text-red-600">
-                        {
-                        Array.isArray(errors) 
-                            ? errors.map((msg, i) => <li key={i}>{msg}</li>) 
-                            : <li>{errors}</li>
-                        }
+                        {errors.map((error) => (
+                            <li key={error}>{error}</li>
+                        ))}
                     </ul>
                 </div>
                 <div>
                     <button type="button" onClick={(e) => setShow(false)} className="outline-none focus:outline-none">
-                        <XIcon className="h-5 w-5 text-red-500"/>                        
+                        <XIcon className="h-5 w-5 text-red-500" />
                     </button>
                 </div>
             </div>

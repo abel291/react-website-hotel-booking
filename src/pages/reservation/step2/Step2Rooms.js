@@ -21,7 +21,7 @@ export default function Step2Rooms() {
     return (
         <>
             <div className="max-w-5xl mx-auto space-y-4 sm:space-y-8">
-                <h2 className="text-2xl font-semibold font-title ">Elija las Habitaciones</h2>
+                <h2 className="text-2xl font-medium font-title ">Elija las Habitaciones</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-3 gap-4">
                     {data.rooms.map((room) => (
                         <div key={room.id} className="shadow rounded-lg overflow-hidden">
@@ -33,9 +33,9 @@ export default function Step2Rooms() {
                                 />
 
                                 <div className="text-white leading-tight space-y-1 py-4 px-4 absolute bottom-0 left-0">
-                                    <h3 className="font-semibold text-xl">{room.name}</h3>
+                                    <h3 className="font-medium text-xl">{room.name}</h3>
                                     <p className="text-xl font-light">
-                                        <span className="text-2xl font-semibold">{formatCurrency(room.price)}</span>
+                                        <span className="text-2xl font-medium">{formatCurrency(room.price)}</span>
 
                                         <span className="text-base">/ noche</span>
                                     </p>
@@ -55,12 +55,11 @@ export default function Step2Rooms() {
                                         id={"room_select_quantity_" + room.id}
                                         className="w-full mt-1"
                                     >
-                                        {room.price_per_quantity &&
-                                            room.price_per_quantity.map((price, i) => (
-                                                <option key={room.id + "-" + i} className="" value={i + 1}>
-                                                    {i + 1 + " - " + formatCurrency(price)}
-                                                </option>
-                                            ))}
+                                        {room.quantity_availables.map((price, i) => (
+                                            <option key={room.id + "-" + i} value={i + 1}>
+                                                {i + 1 + " - " + formatCurrency(price)}
+                                            </option>
+                                        ))}
                                     </select>
                                 </div>
 

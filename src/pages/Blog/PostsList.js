@@ -14,7 +14,7 @@ const PostsList = ({ posts }) => {
                                     alt={post.title}
                                 />
                                 <div className=" px-4 py-3 md:py-5 md:px-6 text-gray-400 font-medium text-sm bg-white  absolute bottom-0 left-0 uppercase">
-                                    <span className="text-gray-600 font-semibold">ADVENTURE</span> - {post.updated_at.slice(0, 10)}
+                                    <span className="text-gray-600 font-medium">ADVENTURE</span> - {post.updated_at.slice(0, 10)}
                                 </div>
                             </div>
                             <div className="sm:px-2 py-4 md:p-6">

@@ -6,10 +6,12 @@ import { useState } from "react"
 import TextLoadingSpinner from "../../../components/TextLoadingSpinner.js"
 import Loading from "../../../components/Loading.js"
 import useReservation from "../../../hooks/useReservation.js"
+import NotificationError from "../../../components/NotificationError.js"
 export default function Step4Form() {
     const { data, updateData, step4Fetch } = useReservation()
     const [errors, setErrors] = useState([])
     const [loading, setLoading] = useState(false)
+    const [loadingStripe, setLoadingStripe] = useState(false)
 
     const nameCardStripe = useRef()
     const stripe = useStripe()
@@ -21,11 +23,13 @@ export default function Step4Form() {
     }
 
     const handleSubmit = async (e) => {
-        // Block native form submission.
+        
         e.preventDefault()
         setErrors([])
-        let nameCardInpu = nameCardStripe.current.value
+        setLoadingStripe(true)
+        setLoading(false)
 
+        let nameCardInpu = nameCardStripe.current.value
         if (!nameCardInpu) {
             setErrors(["El nombre del titular de la targeta es requerido"])
             return
@@ -36,7 +40,7 @@ export default function Step4Form() {
             // envío del formulario hasta que se haya cargado Stripe.js.
             return
         }
-        setLoading(true)
+        
         // Obtenga una referencia a un CardElement montado
         const cardElement = elements.getElement(CardElement)
 
@@ -48,14 +52,15 @@ export default function Step4Form() {
         })
 
         if (error) {
-            setLoading(false)
+            setLoadingStripe(false)
             console.log("[error]", error)
             if (error.type === "validation_error") {
-                setErrors(error.message)
+                setErrors([error.message])
             } else {
-                setErrors("Al parecer hubo un error! El pago a través de su targeta no se pudo realizar.")
+                setErrors(["Al parecer hubo un error! El pago a través de su targeta no se pudo realizar."])
             }
         } else {
+            setLoadingStripe(false)
             await step4Fetch({ setErrors, setLoading, paymentMethod })
         }
     }
@@ -63,8 +68,8 @@ export default function Step4Form() {
         <>
             <div>
                 <Loading isLoading={loading} />
-                <div className="space-y-6">
-                    <div className=" grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
+                <div>
+                    <div className=" grid grid-cols-1 sm:grid-cols-2 gap-2 w-full">
                         <div>
                             <label htmlFor="name" className="text-sm font-medium block">
                                 Nombre y apellido
@@ -188,21 +193,16 @@ export default function Step4Form() {
                     </div>
                 </div>
             </div>
-            
+
             <div>
-                <h2 className="text-xl font-semibold my-4">Pago</h2>
+                <h2 className="text-xl font-medium my-4">Pago</h2>
                 <div className="space-y-4">
+                    <NotificationError errors={errors} scroll={false} />
                     <div>
                         <label htmlFor="titleCard" className="text-sm font-medium block">
                             Titular de la targeta
                         </label>
-                        <input
-                            className="mt-1 form-input form-input-border-normal"
-                            id="titleCard"
-                            type="text"
-                            ref={nameCardStripe}
-                            defaultValue={data.client.name}
-                        />
+                        <input className="mt-1 w-full" id="titleCard" type="text" ref={nameCardStripe} defaultValue={data.client.name} />
                     </div>
                     <div>
                         <label htmlFor="name" className="text-sm font-medium block">
@@ -231,17 +231,19 @@ export default function Step4Form() {
                                 }}
                             ></CardElement>
                         </div>
-                        <span className="text-xs text-gray-400 font-semibold uppercase">fake : 4242424242424242 - 04/24 - 424 - 42424</span>
+                        <span className="text-xs text-gray-400 font-medium uppercase">fake : 4242424242424242 - 04/24 - 424 - 42424</span>
                     </div>
                 </div>
             </div>
             <div className="flex flex-wrap space-y-3 md:space-y-0 md:space-x-3 justify-end">
+                                <label htmlFor=""> {loadingStripe?1:0}</label>
                 <button onClick={() => updateData("step", 3)} className="btn_back_step_reservation">
                     Volver
                 </button>
 
-                <button onClick={handleSubmit} disabled={!stripe} className="btn_next_step_reservation">
-                    <TextLoadingSpinner loading={loading} text="Confirmar orden" textLoading="Confirmando...." />
+                <button onClick={handleSubmit} disabled={!stripe || loadingStripe} className="btn_next_step_reservation" >
+               
+                    <TextLoadingSpinner className="w-5 h-5 text-gray-100" isLoading={loadingStripe} text="Confirmar orden" textLoading="Confirmando...." />
                 </button>
             </div>
         </>

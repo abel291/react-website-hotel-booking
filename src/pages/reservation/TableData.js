@@ -5,7 +5,7 @@ export default function TableData({ data,children},) {
     return (
         <div className=" text-sm bg-white border border-gray-200 rounded divide-y divide-gray-200 ">
             <div className="px-3 md:px-6 py-4 space-y-2">
-                <h3 className="font-bold text-center mb-2">Reserva</h3>
+                <h3 className="font-bold mb-2">Reserva</h3>
                 <div className="flex justify-between">
                     <span>Entrada</span>
                     <span>{data.startDate.toISOString().slice(0, 10)}</span>
@@ -24,7 +24,7 @@ export default function TableData({ data,children},) {
                 </div>
             </div>
             <div className="px-3 md:px-6 py-4 space-y-2">
-                <h3 className="font-bold text-center mb-2">Habitacion</h3>
+                <h3 className="font-bold mb-2">Habitacion</h3>
                 <div className="flex justify-between">
                     <span>Nombre de habitacion</span>
                     <span>{data.roomSelected.name}</span>
@@ -54,7 +54,7 @@ export default function TableData({ data,children},) {
             </div>
             {data.complementsSelect.length > 0 && (
                 <div className="px-3 md:px-6 py-4 space-y-2">
-                    <h3 className="font-bold text-center mb-2">Complementos</h3>
+                    <h3 className="font-bold mb-2">Complementos</h3>
                     {data.complementsSelect.map((com) => (
                         <div key={com.id} className="flex justify-between ">
                             <span className="">{com.name}</span>
@@ -64,7 +64,7 @@ export default function TableData({ data,children},) {
                 </div>
             )}
 
-            <div className="px-3 md:px-6 py-4 space-y-2  font-semibold ">
+            <div className="px-3 md:px-6 py-4 space-y-2  font-medium ">
                 {children}
 
                 <div className="flex justify-between">
@@ -72,8 +72,8 @@ export default function TableData({ data,children},) {
                     <span>{formatCurrency(data.subTotalPrice)}</span>
                 </div>
                 {data.discount && (
-                    <div className="flex justify-between">
-                        <span className="text-gray-500">Descuento {data.discount.percent + "%"}</span>
+                    <div className="flex justify-between text-green-500">
+                        <span className="">Descuento {data.discount.percent + "%"}</span>
                         <span>{formatCurrency(-data.discount.amount)}</span>
                     </div>
                 )}

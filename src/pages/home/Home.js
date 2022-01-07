@@ -112,9 +112,9 @@ const Home = () => {
                                     />
 
                                     <div className="text-white leading-tight space-y-1 py-4 px-4 absolute bottom-0 left-0">
-                                        <h3 className="font-semibold text-2xl font-title capitalize">{room.name}</h3>
+                                        <h3 className="font-medium text-2xl font-title capitalize">{room.name}</h3>
                                         <p className="text-xl font-light">
-                                            <span className="text-2xl font-semibold">${room.price}</span> /noche
+                                            <span className="text-2xl font-medium">${room.price}</span> /noche
                                         </p>
                                     </div>
                                 </div>
@@ -175,10 +175,10 @@ const Home = () => {
                                 {testimonals.map((testimony, index) => (
                                     <SwiperSlide key={index}>
                                         <div key={index} className="w-full h-full  p-8 rounded-md  bg-white space-y-2 text-gray-500">
-                                            <h4 className=" text-2xl font-semibold font-title text-gray-500">{testimony.title}</h4>
+                                            <h4 className=" text-2xl font-medium font-title text-gray-500">{testimony.title}</h4>
                                             <p className="">- {testimony.text}</p>
                                             <div>
-                                                <span className=" font-semibold">{testimony.name}</span>
+                                                <span className=" font-medium">{testimony.name}</span>
                                             </div>
                                         </div>
                                     </SwiperSlide>

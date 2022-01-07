@@ -26,7 +26,7 @@ export default function Notification({ errors, updateData }) {
                     <XCircleIcon className="h-5 w-5 text-red-500" />                      
                 </div>
                 <div className="px-4 flex-grow">
-                    <span className="text-red-700 font-semibold">Tienes Errores por revisar </span>
+                    <span className="text-red-700 font-medium">Tienes Errores por revisar </span>
                     <ul className="list-disc text-red-600">
                         {
                         Array.isArray(errors) 

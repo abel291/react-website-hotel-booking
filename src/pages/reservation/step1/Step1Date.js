@@ -6,11 +6,12 @@ import { Spanish } from "flatpickr/dist/l10n/es.js"
 import { useState } from "react"
 import TextLoadingSpinner from "../../../components/TextLoadingSpinner"
 import useReservation from "../../../hooks/useReservation"
+import ValidationErrors from "../../../components/ValidationErrors"
 
 function Step1Date() {
     const { data, updateData, step1Fetch } = useReservation()
-    const [loading, setLoading] = useState(false)
-    const [errors, setErrors] = useState([])
+    const [loading, setLoading] = useState(false)  
+    const [errors, setErrors] = useState([])  
     //const location = useLocation()
     const optionInputDate = {
         altInput: true,
@@ -26,7 +27,7 @@ function Step1Date() {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        await step1Fetch({ setErrors, setLoading })
+        await step1Fetch({setErrors,setLoading })
     }
 
     // useEffect(() => {
@@ -41,13 +42,13 @@ function Step1Date() {
 
     return (
         <>
-            
+            <ValidationErrors errors={errors} />
             <div className="max-w-2xl mx-auto space-y-4 sm:space-y-8 ">
-                <h2 className="text-2xl font-semibold font-title">Elija las Fechas</h2>
-                <form id="sumbitStep1" className="space-y-4  font-semibold" onSubmit={handleSubmit}>
+                <h2 className="text-2xl font-medium font-title">Elija las Fechas</h2>
+                <form id="sumbitStep1" className="space-y-4  font-medium" onSubmit={handleSubmit}>
                     <div className="flex flex-wrap ">
                         <div className="w-full sm:w-1/2 space-y-1 ">
-                            <label className="block font-semibold text-sm" htmlFor="start_date">
+                            <label className="block font-medium text-sm" htmlFor="start_date">
                                 Fecha de inicio
                             </label>
                             <Flatpickr
@@ -73,7 +74,7 @@ function Step1Date() {
 
                         {/* input fecha final */}
                         <div className="w-full sm:w-1/2 space-y-1 sm:pl-3 mt-4 sm:mt-0">
-                            <label className="block font-semibold text-sm" htmlFor="end_date">
+                            <label className="block font-medium text-sm" htmlFor="end_date">
                                 Fecha de final
                             </label>
                             <Flatpickr
@@ -91,7 +92,7 @@ function Step1Date() {
 
                     <div className="flex space-x-3 w-full sm:w-1/2">
                         <div className="w-1/2 space-y-1 ">
-                            <label className="block font-semibold text-sm" htmlFor="adults">
+                            <label className="block font-medium text-sm" htmlFor="adults">
                                 Adultos
                             </label>
 
@@ -112,7 +113,7 @@ function Step1Date() {
                         </div>
 
                         <div className="w-1/2 space-y-1 ">
-                            <label className="block font-semibold text-sm" htmlFor="kids">
+                            <label className="block font-medium text-sm" htmlFor="kids">
                                 Niños
                             </label>
 
