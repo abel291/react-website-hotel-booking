@@ -11,6 +11,7 @@ export default function NotificationError({ errors ,scroll=true }) {
             document.getElementById("root").scrollIntoView({ behavior: "smooth" })
         }
         setShow(errors.length > 0)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [errors])
     return (
         <Transition
@@ -29,9 +30,11 @@ export default function NotificationError({ errors ,scroll=true }) {
                 <div className="px-4 flex-grow">
                     <span className="text-red-700 font-medium">Tienes Errores por revisar </span>
                     <ul className="list-disc text-red-600">
-                        {errors.map((error) => (
-                            <li key={error}>{error}</li>
-                        ))}
+                    {Array.isArray(errors) 
+                        ? errors.map((error) => <li key={error}>{error}</li>) 
+                        : <li>{errors}</li>
+                    }
+                        
                     </ul>
                 </div>
                 <div>

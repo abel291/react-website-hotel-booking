@@ -1,4 +1,4 @@
-import { ProviderReservation } from "./context/ReservationContext"
+
 import AboutUs from "./pages/aboutUs/AboutUs"
 import Blog from "./pages/blog/Blog"
 import PostPage from "./pages/blog/PostPage"

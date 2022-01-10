@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react"
+
 //import useSWR from "swr"
 import useSWRImmutable from "swr/immutable"
 import apiClient from "../helpers/apiClient"
+import { formatErrors } from "../helpers/helpers"
 
 const useReservation = () => {
     const dataInit = () => {
@@ -158,9 +159,9 @@ const useReservation = () => {
         
     }
 
-    const formatErrors = (error) => {
-        return error.response.status !== 422 ? ["algo salio mal"] : Object.values(error.response.data.errors).flat()
-    }
+    // const formatErrors = (error) => {
+    //     return error.response.status !== 422 ? ["algo salio mal"] : Object.values(error.response.data.errors).flat()
+    // }
 
     return { data, updateData, step1Fetch, step3Fetch, step4Fetch,resetData }
 }

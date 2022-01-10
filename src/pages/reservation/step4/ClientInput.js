@@ -75,7 +75,7 @@ export default function Step4Form() {
                                 Nombre y apellido
                             </label>
                             <input
-                                className="mt-1 w-full"
+                                className="form-input text-sm mt-1 w-full"
                                 name="name"
                                 id="name"
                                 type="text"
@@ -89,7 +89,7 @@ export default function Step4Form() {
                                 Telefono
                             </label>
                             <input
-                                className="mt-1 w-full"
+                                className="form-input text-sm mt-1 w-full"
                                 name="phone"
                                 id="phone"
                                 type="text"
@@ -105,7 +105,7 @@ export default function Step4Form() {
                             <input
                                 defaultValue={data.client.email}
                                 onChange={handleChangeInput}
-                                className="mt-1 w-full"
+                                className="form-input text-sm mt-1 w-full"
                                 name="email"
                                 id="email"
                                 type="email"
@@ -117,7 +117,7 @@ export default function Step4Form() {
                                 Confirmar email
                             </label>
                             <input
-                                className="mt-1 w-full"
+                                className="form-input text-sm mt-1 w-full"
                                 name="email_confirmation"
                                 id="email_confirmation"
                                 type="email"
@@ -131,7 +131,7 @@ export default function Step4Form() {
                                 Pais
                             </label>
                             <input
-                                className="mt-1 w-full"
+                                className="form-input text-sm mt-1 w-full"
                                 name="country"
                                 id="country"
                                 type="text"
@@ -145,7 +145,7 @@ export default function Step4Form() {
                                 Ciudad
                             </label>
                             <input
-                                className="mt-1 w-full"
+                                className="form-input text-sm mt-1 w-full"
                                 name="city"
                                 id="city"
                                 type="text"
@@ -160,7 +160,7 @@ export default function Step4Form() {
                             </label>
                             <Flatpickr
                                 name="check_in"
-                                className="mt-1 w-full"
+                                className="form-input text-sm mt-1 w-full"
                                 options={{
                                     enableTime: true,
                                     noCalendar: true,
@@ -184,7 +184,7 @@ export default function Step4Form() {
                                 name="special_request"
                                 id="special_request"
                                 rows="5"
-                                className="mt-1 w-full"
+                                className="form-input text-sm mt-1 w-full"
                                 placeholder="Algo a tener en cuenta...."
                                 defaultValue={data.client.special_request}
                                 onChange={handleChangeInput}
@@ -202,7 +202,7 @@ export default function Step4Form() {
                         <label htmlFor="titleCard" className="text-sm font-medium block">
                             Titular de la targeta
                         </label>
-                        <input className="mt-1 w-full" id="titleCard" type="text" ref={nameCardStripe} defaultValue={data.client.name} />
+                        <input className="form-input text-sm mt-1 w-full" id="titleCard" type="text" ref={nameCardStripe} defaultValue={data.client.name} />
                     </div>
                     <div>
                         <label htmlFor="name" className="text-sm font-medium block">

@@ -26,10 +26,10 @@ export default function Step4ResumenOrder() {
                     <label htmlFor="discount_input" className="mb-1 font-medium">
                         Codigo descuento                        
                     </label>
-                    <div className="flex ">
+                    <div className="flex items-stretch ">
                         <div className="flex-grow pr-2 ">
                             <input
-                                className=" w-full mt-1"
+                                className="form-input w-full text-sm"
                                 id="discount_input"
                                 type="text"
                                 value={discountInput}

@@ -1,9 +1,6 @@
 
-import { useEffect } from "react"
 import LoadingPage from "../../components/LoadingPage"
-import ValidationErrors from "../../components/ValidationErrors"
 import useReservation from "../../hooks/useReservation"
-
 import Step1Date from "./step1/Step1Date"
 import Step2Rooms from "./step2/Step2Rooms"
 import Step3Complements from "./step3/Step3Complements"

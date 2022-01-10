@@ -7,6 +7,7 @@ import { useState } from "react"
 import TextLoadingSpinner from "../../../components/TextLoadingSpinner"
 import useReservation from "../../../hooks/useReservation"
 import ValidationErrors from "../../../components/ValidationErrors"
+import NotificationError from "../../../components/NotificationError"
 
 function Step1Date() {
     const { data, updateData, step1Fetch } = useReservation()
@@ -42,7 +43,7 @@ function Step1Date() {
 
     return (
         <>
-            <ValidationErrors errors={errors} />
+            <NotificationError errors={errors} />
             <div className="max-w-2xl mx-auto space-y-4 sm:space-y-8 ">
                 <h2 className="text-2xl font-medium font-title">Elija las Fechas</h2>
                 <form id="sumbitStep1" className="space-y-4  font-medium" onSubmit={handleSubmit}>
@@ -54,7 +55,7 @@ function Step1Date() {
                             <Flatpickr
                                 name="startDate"
                                 value={data.startDate}
-                                className="w-full"
+                                className="form-input w-full"
                                 options={{
                                     ...optionInputDate,
                                     minDate: "today",
@@ -80,7 +81,7 @@ function Step1Date() {
                             <Flatpickr
                                 name="endDate"
                                 value={data.endDate}
-                                className="w-full"
+                                className="form-input w-full"
                                 options={{
                                     ...optionInputDate,
                                     minDate: data.startDate,
@@ -99,7 +100,7 @@ function Step1Date() {
                             <select
                                 onChange={handleChange}
                                 value={data.adults}
-                                className="w-full"
+                                className="form-input w-full"
                                 name="adults"
                             >
                                 <option value="1">1 Adulto</option>
@@ -121,7 +122,7 @@ function Step1Date() {
                                 onChange={handleChange}
                                 value={data.kids}
                                 name="kids"
-                                className="w-full"
+                                className="form-input w-full"
                             >
                                 <option value="0">0 Niños</option>
                                 <option value="1">1 Niño</option>

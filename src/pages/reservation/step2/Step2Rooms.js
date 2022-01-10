@@ -53,7 +53,7 @@ export default function Step2Rooms() {
                                     <select
                                         defaultValue={data.roomSelected.id === room.id ? data.roomQuantity : 1}
                                         id={"room_select_quantity_" + room.id}
-                                        className="w-full mt-1"
+                                        className="form-input w-full mt-1"
                                     >
                                         {room.quantity_availables.map((price, i) => (
                                             <option key={room.id + "-" + i} value={i + 1}>

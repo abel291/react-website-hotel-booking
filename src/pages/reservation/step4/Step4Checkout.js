@@ -3,8 +3,6 @@ import ClientInput from "./ClientInput.js"
 import ResumenOrder from "./ResumenOrder.js"
 import { Elements } from "@stripe/react-stripe-js"
 import { loadStripe } from "@stripe/stripe-js"
-import ValidationErrors from "../../../components/ValidationErrors.js"
-import NotificationError from "../../../components/NotificationError.js"
 
 export default function Step4Checkout() {
     const [stripePromise] = useState(() => loadStripe("pk_test_ejdWQWajqC4QwST95KoZiDZK"))

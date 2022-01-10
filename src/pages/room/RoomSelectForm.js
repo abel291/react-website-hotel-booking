@@ -67,7 +67,7 @@ const RoomSelectForm = ({handleSubmitReservation}) => {
                     <select
                         onChange={(date) => setData({ ...data, adults: date[0] })}
                         value={data.adults}
-                        className="mt-1 form-select form-input form-input-border-normal"
+                        className="form-input mt-1 "
                         name="adults"
                     >
                         <option value="1">1 Adulto</option>
@@ -88,7 +88,7 @@ const RoomSelectForm = ({handleSubmitReservation}) => {
                         onChange={(date) => setData({ ...data, kids: date[0] })}
                         value={data.kids}
                         name="kids"
-                        className="mt-1 form-select form-input form-input-border-normal"
+                        className="form-input mt-1 form-select"
                     >
                         <option value="0">0 Niños</option>
                         <option value="1">1 Niño</option>
