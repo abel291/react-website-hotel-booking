@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react"
+import React from "react"
 import Flatpickr from "react-flatpickr"
 import "flatpickr/dist/themes/material_green.css"
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js"
@@ -71,47 +71,11 @@ export default function Step4Form() {
                 <div>
                     <div className=" grid grid-cols-1 sm:grid-cols-2 gap-x-2 gap-y-4 w-full">
                         <Input label="Nombre y apellido" name="name" handleChange={handleChangeInput} value={data.client.name} />
-                        {/* <div>
-                            <label htmlFor="name" className="text-sm font-medium block">
-                                Nombre y apellido
-                            </label>
-                            <input
-                                className="form-input text-sm mt-1 w-full"
-                                name="name"
-                                id="name"
-                                type="text"
-                                defaultValue={data.client.name}
-                                onChange={handleChangeInput}
-                            />
-                        </div> */}
+                        
                         <Input label="Telefono" name="phone" handleChange={handleChangeInput} value={data.client.phone} />
-                        {/* <div>
-                            <label htmlFor="phone" className="text-sm font-medium block">
-                                Telefono
-                            </label>
-                            <input
-                                className="form-input text-sm mt-1 w-full"
-                                name="phone"
-                                id="phone"
-                                type="text"
-                                defaultValue={data.client.phone}
-                                onChange={handleChangeInput}
-                            />
-                        </div> */}
+                        
                         <Input label="Email" name="email" handleChange={handleChangeInput} value={data.client.email} type="email" />
-                        {/* <div>
-                            <label htmlFor="email" className="text-sm font-medium block">
-                                Email
-                            </label>
-                            <input
-                                defaultValue={data.client.email}
-                                onChange={handleChangeInput}
-                                className="form-input text-sm mt-1 w-full"
-                                name="email"
-                                id="email"
-                                type="email"
-                            />
-                        </div> */}
+                        
                         <Input
                             label="Confirmar email"
                             name="email_confirmation"
@@ -119,47 +83,11 @@ export default function Step4Form() {
                             value={data.client.email}
                             type="email"
                         />
-                        {/* <div>
-                            <label htmlFor="email_confirmation" className="text-sm font-medium block">
-                                Confirmar email
-                            </label>
-                            <input
-                                className="form-input text-sm mt-1 w-full"
-                                name="email_confirmation"
-                                id="email_confirmation"
-                                type="email"
-                                defaultValue={data.client.email}
-                                onChange={handleChangeInput}
-                            />
-                        </div> */}
+                        
                         <Input label="Pais" name="country" handleChange={handleChangeInput} value={data.client.country} />
-                        {/* <div>
-                            <label htmlFor=" country" className="text-sm font-medium block">
-                                Pais
-                            </label>
-                            <input
-                                className="form-input text-sm mt-1 w-full"
-                                name="country"
-                                id="country"
-                                type="text"
-                                defaultValue={data.client.country}
-                                onChange={handleChangeInput}
-                            />
-                        </div> */}
+                        
                         <Input label="Ciudad" name="city" handleChange={handleChangeInput} value={data.client.city} />
-                        {/* <div>
-                            <label htmlFor="city" className="text-sm font-medium block">
-                                Ciudad
-                            </label>
-                            <input
-                                className="form-input text-sm mt-1 w-full"
-                                name="city"
-                                id="city"
-                                type="text"
-                                defaultValue={data.client.city}
-                                onChange={handleChangeInput}
-                            />
-                        </div> */}
+                       
 
                         <div>
                             <Label htmlFor="check_in">Hora de llegada</Label>
