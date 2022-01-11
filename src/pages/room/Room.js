@@ -1,14 +1,14 @@
 import { useParams } from "react-router-dom"
-import RoomSelectDescription from "./RoomSelectDescription"
-import RoomSelectComplements from "./RoomSelectComplements"
-import RoomSelectForm from "./RoomSelectForm"
-import RoomSelectPrice from "./RoomSelectPrice"
-import RoomSelectQuantity from "./RoomSelectQuantity"
-import CarouselGallery from "../../components/CarouselGallery"
-import BannerTitle from "../../components/BannerTitle"
-import usePage from "../../hooks/usePage"
-import Head from "../../components/Head"
-import LoadingPage from "../../components/LoadingPage"
+import SelectDescription from "pages/room/SelectDescription"
+import SelectComplements from "pages/room/SelectComplements"
+import SelectForm from "pages/room/SelectForm"
+import SelectPrice from "pages/room/SelectPrice"
+import SelectQuantity from "pages/room/SelectQuantity"
+import CarouselGallery from "components/CarouselGallery"
+import BannerTitle from "components/BannerTitle"
+import usePage from "hooks/usePage"
+import Head from "components/Head"
+import LoadingPage from "components/LoadingPage"
 const Room = () => {
     const { slug } = useParams()
     const { data } = usePage("room/" + slug)
@@ -24,20 +24,20 @@ const Room = () => {
                     <div className="w-full lg:w-2/3 space-y-8 lg:mr-4 mb-8 lg-mb-0">
                         {data.room.images && <CarouselGallery images={data.room.images} path={"/storage/images/"} />}
 
-                        <RoomSelectQuantity room={data.room} />
+                        <SelectQuantity room={data.room} />
 
-                        <RoomSelectDescription room={data.room} />
+                        <SelectDescription room={data.room} />
 
-                        <RoomSelectComplements room={data.room} />
+                        <SelectComplements room={data.room} />
                     </div>
 
                     <div className="w-full lg:w-1/3 space-y-8 ">
-                        <RoomSelectPrice room={data.room} />
+                        <SelectPrice room={data.room} />
 
                         <div className="px-2">
                             <div className="font-bold text-2xl font-title mb-3">Buscar Habitacion</div>
                             <div>
-                                <RoomSelectForm />
+                                <SelectForm />
                             </div>
                         </div>
                     </div>

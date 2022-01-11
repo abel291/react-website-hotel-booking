@@ -3,10 +3,10 @@ import { useEffect, useRef, useState } from "react"
 import Isotope from "isotope-layout"
 import imagesLoaded from "imagesloaded"
 import FsLightbox from "fslightbox-react"
-import BannerTitle from "../../components/BannerTitle"
-import GalleriesPageLoading from "./GalleriesPageLoading"
-import usePage from "../../hooks/usePage"
-import LoadingPage from "../../components/LoadingPage"
+import BannerTitle from "components/BannerTitle"
+import GalleriesPageLoading from "pages/gallery/GalleriesPageLoading"
+import usePage from "hooks/usePage"
+import LoadingPage from "components/LoadingPage"
 
 const Gallery = () => {
     const { data } = usePage("page/gallery")

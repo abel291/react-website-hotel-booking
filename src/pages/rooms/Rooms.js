@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom"
 
-import BannerTitle from "../../components/BannerTitle"
-import Head from "../../components/Head"
-import LoadingPage from "../../components/LoadingPage"
-import NotificationError from "../../components/NotificationError"
-import { formatErrors } from "../../helpers/helpers"
-import usePage from "../../hooks/usePage"
-import FormReservation from "./FormReservation"
+import BannerTitle from "components/BannerTitle"
+import Head from "components/Head"
+import LoadingPage from "components/LoadingPage"
+import NotificationError from "components/NotificationError"
+import { formatErrors } from "helpers/helpers"
+import usePage from "hooks/usePage"
+import FormReservation from "pages/rooms/FormReservation"
 
 const Rooms = () => {
     const { data,error } = usePage("page/rooms")

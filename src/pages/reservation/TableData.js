@@ -1,4 +1,4 @@
-import { formatCurrency } from "../../helpers/helpers"
+import { formatCurrency } from "helpers/helpers"
 
 export default function TableData({ data, children }) {
     return (

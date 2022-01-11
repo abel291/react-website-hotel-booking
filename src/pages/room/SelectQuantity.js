@@ -1,4 +1,4 @@
-const RoomSelectQuantity = ({room}) => {
+const SelectQuantity = ({room}) => {
     return (
         <div className="flex flex-col md:flex-row md:justify-between md:items-center md:divide-x md:divide-gray-300  font-bold">
             <div className="flex items-center  px-2 md:pr-5 lg:pr-14  py-2 md:py-4 ">
@@ -28,4 +28,4 @@ const RoomSelectQuantity = ({room}) => {
     )
 }
 
-export default RoomSelectQuantity
+export default SelectQuantity

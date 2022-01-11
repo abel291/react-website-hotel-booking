@@ -1,4 +1,4 @@
-const RoomSelectComplements = ({ room }) => {
+const SelectComplements = ({ room }) => {
     return (
         <div className="space-y-6">
             <h3 className="font-bold text-3xl font-title ">Complementos</h3>
@@ -15,4 +15,4 @@ const RoomSelectComplements = ({ room }) => {
     )
 }
 
-export default RoomSelectComplements
+export default SelectComplements

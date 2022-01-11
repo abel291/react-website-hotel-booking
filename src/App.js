@@ -1,10 +1,10 @@
 import { Route, Switch, useLocation } from "react-router"
 import { SWRConfig } from "swr"
-import apiClient from "./helpers/apiClient"
-import Footer from "./components/Footer"
-import Header from "./components/Header"
+import apiClient from "helpers/apiClient"
+import Footer from "components/Footer"
+import Header from "components/Header"
 
-import routes from "./routes"
+import routes from "routes"
 import { useEffect, useState } from "react"
 
 const App = () => {

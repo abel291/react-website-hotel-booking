@@ -1,7 +1,7 @@
-import BannerTitle from "../../components/BannerTitle"
-import Head from "../../components/Head"
-import LoadingPage from "../../components/LoadingPage"
-import usePage from "../../hooks/usePage"
+import BannerTitle from "components/BannerTitle"
+import Head from "components/Head"
+import LoadingPage from "components/LoadingPage"
+import usePage from "hooks/usePage"
 
 const CancellationPolicies = () => {
     const { data } = usePage("page/cookies_policy")

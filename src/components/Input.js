@@ -1,20 +1,28 @@
-const Input = ({ label, name, type, value, setData, containerClassName = "", msgErrorInput, autoComplete = "", placeholder = "" }) => {
+import { useEffect, useRef } from "react"
+import Label from "components/Label"
+
+const Input = ({ type = "text", name, value="", className = "", autoComplete = "", required, isFocused, handleChange, label = "" }) => {
+    const input = useRef()
+
+    useEffect(() => {
+        if (isFocused) {
+            input.current.focus()
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
     return (
-        <div className={containerClassName}>
-            <label htmlFor={name} >
-                 {label} {/*<span className="form-input-label-error">{msgErrorInput}</span> */}
-            </label>
+        <div>
+            <Label htmlFor={name}>{label}</Label>
             <input
                 id={name}
-                name={name}
                 type={type}
-                autoComplete={autoComplete}
-                required
-                // className={"mt-1 form-input  form-input-border-" + (msgErrorInput ? "-error" : "-normal")}
-                className="mt-1 form-input  form-input-border-normal"
-                placeholder={placeholder}
+                name={name}
                 value={value}
-                onChange={setData}
+                className={`w-full form-input mt-1 ` + className}
+                ref={input}
+                autoComplete={autoComplete}
+                required={required}
+                onChange={(e) => handleChange(e)}
             />
         </div>
     )

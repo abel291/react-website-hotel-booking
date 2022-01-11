@@ -4,10 +4,10 @@ import "flatpickr/dist/themes/material_green.css"
 import { Spanish } from "flatpickr/dist/l10n/es.js"
 
 import { useState } from "react"
-import TextLoadingSpinner from "../../../components/TextLoadingSpinner"
-import useReservation from "../../../hooks/useReservation"
-import ValidationErrors from "../../../components/ValidationErrors"
-import NotificationError from "../../../components/NotificationError"
+import TextLoadingSpinner from "components/TextLoadingSpinner"
+import useReservation from "hooks/useReservation"
+import ValidationErrors from "components/ValidationErrors"
+import NotificationError from "components/NotificationError"
 
 function Step1Date() {
     const { data, updateData, step1Fetch } = useReservation()

@@ -1,6 +1,6 @@
 import React from "react"
-import { formatCurrency } from "../../../helpers/helpers"
-import useReservation from "../../../hooks/useReservation"
+import { formatCurrency } from "helpers/helpers"
+import useReservation from "hooks/useReservation"
 
 export default function Step2Rooms() {
     const { data, updateData } = useReservation()

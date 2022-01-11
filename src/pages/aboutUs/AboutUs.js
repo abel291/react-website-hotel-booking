@@ -1,11 +1,11 @@
-import TitleSection from "../../components/TitleSection"
+import TitleSection from "components/TitleSection"
 
-import CarouselGallery from "../../components/CarouselGallery"
-import BannerTitle from "../../components/BannerTitle"
+import CarouselGallery from "components/CarouselGallery"
+import BannerTitle from "components/BannerTitle"
 import { Link } from "react-router-dom"
-import Head from "../../components/Head"
-import usePage from "../../hooks/usePage"
-import LoadingPage from "../../components/LoadingPage"
+import Head from "components/Head"
+import usePage from "hooks/usePage"
+import LoadingPage from "components/LoadingPage"
 const AboutUs = () => {
     const { data } = usePage("page/about-us")
     if (!data) return <LoadingPage />

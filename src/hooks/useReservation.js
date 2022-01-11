@@ -1,8 +1,8 @@
 
 //import useSWR from "swr"
 import useSWRImmutable from "swr/immutable"
-import apiClient from "../helpers/apiClient"
-import { formatErrors } from "../helpers/helpers"
+import apiClient from "helpers/apiClient"
+import { formatErrors } from "helpers/helpers"
 
 const useReservation = () => {
     const dataInit = () => {

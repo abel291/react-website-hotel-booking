@@ -1,10 +1,10 @@
 import React from "react"
 
 import { useState } from "react"
-import TextLoadingSpinner from "../../../components/TextLoadingSpinner"
-import ValidationErrors from "../../../components/ValidationErrors"
-import { formatCurrency } from "../../../helpers/helpers"
-import useReservation from "../../../hooks/useReservation"
+import TextLoadingSpinner from "components/TextLoadingSpinner"
+import ValidationErrors from "components/ValidationErrors"
+import { formatCurrency } from "helpers/helpers"
+import useReservation from "hooks/useReservation"
 
 //import { useEffect } from "react"
 export default function Step3Complements() {

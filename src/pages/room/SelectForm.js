@@ -2,7 +2,7 @@ import Flatpickr from "react-flatpickr"
 import "flatpickr/dist/themes/material_green.css"
 import { Spanish } from "flatpickr/dist/l10n/es.js"
 import { useState } from "react"
-const RoomSelectForm = ({handleSubmitReservation}) => {
+const SelectForm = ({handleSubmitReservation}) => {
     const [data, setData] = useState({ endDate: "", startDate: "", aduts: "", kids: "" })
     const optionInputDate = {
         altInput: true,
@@ -109,4 +109,4 @@ const RoomSelectForm = ({handleSubmitReservation}) => {
     )
 }
 
-export default RoomSelectForm
+export default SelectForm

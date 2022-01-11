@@ -1,15 +1,15 @@
-import TitleSection from "../../components/TitleSection"
+import TitleSection from "components/TitleSection"
 
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/outline"
 import { Swiper, SwiperSlide } from "swiper/react"
 import SwiperCore, { Navigation, Autoplay } from "swiper"
 import "swiper/swiper-bundle.css"
-import BannerTitle from "../../components/BannerTitle"
+import BannerTitle from "components/BannerTitle"
 import { Link } from "react-router-dom"
-import InputReservation from "./InputReservation"
-import usePage from "../../hooks/usePage"
-import Head from "../../components/Head"
-import LoadingPage from "../../components/LoadingPage"
+import InputReservation from "pages/home/InputReservation"
+import usePage from "hooks/usePage"
+import Head from "components/Head"
+import LoadingPage from "components/LoadingPage"
 const testimonals = [
     {
         title: "¡El mejor hotel! ",

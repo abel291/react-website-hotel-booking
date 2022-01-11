@@ -1,15 +1,15 @@
 import { useState } from "react"
 
 import {  useHistory } from "react-router-dom"
-//import apiClient from "../../auth/apiClient"
-import BannerTitle from "../../components/BannerTitle"
-import Head from "../../components/Head"
-import LoadingPage from "../../components/LoadingPage"
-import Pagination from "../../components/Pagination"
-import usePage from "../../hooks/usePage"
+//import apiClient from "auth/apiClient"
+import BannerTitle from "components/BannerTitle"
+import Head from "components/Head"
+import LoadingPage from "components/LoadingPage"
+import Pagination from "components/Pagination"
+import usePage from "hooks/usePage"
 
-import BlogPageLoading from "./BlogPageLoading"
-import PostsList from "./PostsList"
+import BlogPageLoading from "pages/blog/BlogPageLoading"
+import PostsList from "pages/blog/PostsList"
 
 const Blog = () => {
     const { data } = usePage("page/blog")

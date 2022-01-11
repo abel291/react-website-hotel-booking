@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useSWRConfig } from "swr"
-import TextLoadingSpinner from "./TextLoadingSpinner"
+import TextLoadingSpinner from "components/TextLoadingSpinner"
 
 const LoadingPage = () => {
     const { mutate } = useSWRConfig()

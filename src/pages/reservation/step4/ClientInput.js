@@ -1,19 +1,20 @@
-import React, { useRef } from "react"
+import React, { useEffect, useRef } from "react"
 import Flatpickr from "react-flatpickr"
 import "flatpickr/dist/themes/material_green.css"
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js"
 import { useState } from "react"
-import TextLoadingSpinner from "../../../components/TextLoadingSpinner.js"
-import Loading from "../../../components/Loading.js"
-import useReservation from "../../../hooks/useReservation.js"
-import NotificationError from "../../../components/NotificationError.js"
+import TextLoadingSpinner from "components/TextLoadingSpinner.js"
+import Loading from "components/Loading.js"
+import useReservation from "hooks/useReservation.js"
+import NotificationError from "components/NotificationError.js"
+import Input from "components/Input"
+import Label from "components/Label"
 export default function Step4Form() {
     const { data, updateData, step4Fetch } = useReservation()
     const [errors, setErrors] = useState([])
     const [loading, setLoading] = useState(false)
     const [loadingStripe, setLoadingStripe] = useState(false)
 
-    const nameCardStripe = useRef()
     const stripe = useStripe()
     const elements = useElements()
 
@@ -23,14 +24,12 @@ export default function Step4Form() {
     }
 
     const handleSubmit = async (e) => {
-        
         e.preventDefault()
         setErrors([])
         setLoadingStripe(true)
         setLoading(false)
 
-        let nameCardInpu = nameCardStripe.current.value
-        if (!nameCardInpu) {
+        if (!data.client.titleCard) {
             setErrors(["El nombre del titular de la targeta es requerido"])
             return
         }
@@ -40,7 +39,7 @@ export default function Step4Form() {
             // envío del formulario hasta que se haya cargado Stripe.js.
             return
         }
-        
+
         // Obtenga una referencia a un CardElement montado
         const cardElement = elements.getElement(CardElement)
 
@@ -48,12 +47,12 @@ export default function Step4Form() {
         const { error, paymentMethod } = await stripe.createPaymentMethod({
             type: "card",
             card: cardElement,
-            billing_details: { name: nameCardInpu },
+            billing_details: { name: data.client.titleCard },
         })
 
         if (error) {
             setLoadingStripe(false)
-            console.log("[error]", error)
+
             if (error.type === "validation_error") {
                 setErrors([error.message])
             } else {
@@ -64,13 +63,15 @@ export default function Step4Form() {
             await step4Fetch({ setErrors, setLoading, paymentMethod })
         }
     }
+
     return (
         <>
             <div>
                 <Loading isLoading={loading} />
                 <div>
-                    <div className=" grid grid-cols-1 sm:grid-cols-2 gap-2 w-full">
-                        <div>
+                    <div className=" grid grid-cols-1 sm:grid-cols-2 gap-x-2 gap-y-4 w-full">
+                        <Input label="Nombre y apellido" name="name" handleChange={handleChangeInput} value={data.client.name} />
+                        {/* <div>
                             <label htmlFor="name" className="text-sm font-medium block">
                                 Nombre y apellido
                             </label>
@@ -82,9 +83,9 @@ export default function Step4Form() {
                                 defaultValue={data.client.name}
                                 onChange={handleChangeInput}
                             />
-                        </div>
-
-                        <div>
+                        </div> */}
+                        <Input label="Telefono" name="phone" handleChange={handleChangeInput} value={data.client.phone} />
+                        {/* <div>
                             <label htmlFor="phone" className="text-sm font-medium block">
                                 Telefono
                             </label>
@@ -96,9 +97,9 @@ export default function Step4Form() {
                                 defaultValue={data.client.phone}
                                 onChange={handleChangeInput}
                             />
-                        </div>
-
-                        <div>
+                        </div> */}
+                        <Input label="Email" name="email" handleChange={handleChangeInput} value={data.client.email} type="email" />
+                        {/* <div>
                             <label htmlFor="email" className="text-sm font-medium block">
                                 Email
                             </label>
@@ -110,9 +111,15 @@ export default function Step4Form() {
                                 id="email"
                                 type="email"
                             />
-                        </div>
-
-                        <div>
+                        </div> */}
+                        <Input
+                            label="Confirmar email"
+                            name="email_confirmation"
+                            handleChange={handleChangeInput}
+                            value={data.client.email}
+                            type="email"
+                        />
+                        {/* <div>
                             <label htmlFor="email_confirmation" className="text-sm font-medium block">
                                 Confirmar email
                             </label>
@@ -124,9 +131,9 @@ export default function Step4Form() {
                                 defaultValue={data.client.email}
                                 onChange={handleChangeInput}
                             />
-                        </div>
-
-                        <div>
+                        </div> */}
+                        <Input label="Pais" name="country" handleChange={handleChangeInput} value={data.client.country} />
+                        {/* <div>
                             <label htmlFor=" country" className="text-sm font-medium block">
                                 Pais
                             </label>
@@ -138,9 +145,9 @@ export default function Step4Form() {
                                 defaultValue={data.client.country}
                                 onChange={handleChangeInput}
                             />
-                        </div>
-
-                        <div>
+                        </div> */}
+                        <Input label="Ciudad" name="city" handleChange={handleChangeInput} value={data.client.city} />
+                        {/* <div>
                             <label htmlFor="city" className="text-sm font-medium block">
                                 Ciudad
                             </label>
@@ -152,12 +159,10 @@ export default function Step4Form() {
                                 defaultValue={data.client.city}
                                 onChange={handleChangeInput}
                             />
-                        </div>
+                        </div> */}
 
                         <div>
-                            <label htmlFor="check_in" className="text-sm font-medium block">
-                                Hora de llegada
-                            </label>
+                            <Label htmlFor="check_in">Hora de llegada</Label>
                             <Flatpickr
                                 name="check_in"
                                 className="form-input text-sm mt-1 w-full"
@@ -176,15 +181,12 @@ export default function Step4Form() {
                         </div>
 
                         <div className="special_request  sm:col-span-2">
-                            <label htmlFor="special_request" className="text-sm font-medium block">
-                                Peticion especial
-                            </label>
-
+                            <Label htmlFor="special_request">Peticion especial</Label>
                             <textarea
                                 name="special_request"
                                 id="special_request"
                                 rows="5"
-                                className="form-input text-sm mt-1 w-full"
+                                className="form-input mt-1 w-full"
                                 placeholder="Algo a tener en cuenta...."
                                 defaultValue={data.client.special_request}
                                 onChange={handleChangeInput}
@@ -198,12 +200,8 @@ export default function Step4Form() {
                 <h2 className="text-xl font-medium my-4">Pago</h2>
                 <div className="space-y-4">
                     <NotificationError errors={errors} scroll={false} />
-                    <div>
-                        <label htmlFor="titleCard" className="text-sm font-medium block">
-                            Titular de la targeta
-                        </label>
-                        <input className="form-input text-sm mt-1 w-full" id="titleCard" type="text" ref={nameCardStripe} defaultValue={data.client.name} />
-                    </div>
+                    <Input label="Titular de la targeta" name="titleCard" handleChange={handleChangeInput} value={data.client.titleCard} />
+
                     <div>
                         <label htmlFor="name" className="text-sm font-medium block">
                             Targeta de credito
@@ -214,7 +212,7 @@ export default function Step4Form() {
                                     style: {
                                         base: {
                                             color: "#303238",
-                                            fontSize: "14px",
+                                            fontSize: "15px",
                                             fontFamily: '"Open Sans", sans-serif',
                                             fontSmoothing: "antialiased",
                                             "::placeholder": {
@@ -236,14 +234,18 @@ export default function Step4Form() {
                 </div>
             </div>
             <div className="flex flex-wrap space-y-3 md:space-y-0 md:space-x-3 justify-end">
-                                <label htmlFor=""> {loadingStripe?1:0}</label>
+                <label htmlFor=""> {loadingStripe ? 1 : 0}</label>
                 <button onClick={() => updateData("step", 3)} className="btn_back_step_reservation">
                     Volver
                 </button>
 
-                <button onClick={handleSubmit} disabled={!stripe || loadingStripe} className="btn_next_step_reservation" >
-               
-                    <TextLoadingSpinner className="w-5 h-5 text-gray-100" isLoading={loadingStripe} text="Confirmar orden" textLoading="Confirmando...." />
+                <button onClick={handleSubmit} disabled={!stripe || loadingStripe} className="btn_next_step_reservation">
+                    <TextLoadingSpinner
+                        className="w-5 h-5 text-gray-100"
+                        isLoading={loadingStripe}
+                        text="Confirmar orden"
+                        textLoading="Confirmando...."
+                    />
                 </button>
             </div>
         </>

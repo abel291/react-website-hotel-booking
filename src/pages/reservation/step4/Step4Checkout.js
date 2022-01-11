@@ -1,6 +1,6 @@
 import React, { useState } from "react"
-import ClientInput from "./ClientInput.js"
-import ResumenOrder from "./ResumenOrder.js"
+import ClientInput from "pages/reservation/step4/ClientInput.js"
+import ResumenOrder from "pages/reservation/step4/ResumenOrder.js"
 import { Elements } from "@stripe/react-stripe-js"
 import { loadStripe } from "@stripe/stripe-js"
 

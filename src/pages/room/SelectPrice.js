@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 
-const RoomSelectPrice = ({room}) => {
+const SelectPrice = ({room}) => {
     return (
         <div>
             <div className="px-6 py-8 bg-gray-700 text-white">
@@ -29,4 +29,4 @@ const RoomSelectPrice = ({room}) => {
     )
 }
 
-export default RoomSelectPrice
+export default SelectPrice

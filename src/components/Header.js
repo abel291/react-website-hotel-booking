@@ -2,13 +2,13 @@ import { MenuIcon, XIcon } from "@heroicons/react/outline"
 import { BookmarkIcon } from "@heroicons/react/solid"
 import { useState } from "react"
 import { NavLink } from "react-router-dom"
-import routes from "../routes"
+import routes from "routes"
 import useSWRImmutable from "swr/immutable"
 const routeNavBar = [
     { ...routes.rooms, title: "Habitaciones" },
     { ...routes.gallery, title: "Galeria" },
     { ...routes.about, title: "Nosotros" },
-    //{ ...routes.blog, title: "Blog" },
+    { ...routes.blog, title: "Blog" },
     { ...routes.contact, title: "Contacto" },
 ]
 

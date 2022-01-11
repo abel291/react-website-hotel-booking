@@ -1,4 +1,4 @@
-const RoomSelectDescription = ({room}) => {
+const SelectDescription = ({room}) => {
     return (
         <div className="space-y-6">
             <h3 className="font-bold text-3xl font-title">Descripción</h3>
@@ -7,4 +7,4 @@ const RoomSelectDescription = ({room}) => {
     )
 }
 
-export default RoomSelectDescription
+export default SelectDescription

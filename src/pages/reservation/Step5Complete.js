@@ -1,10 +1,10 @@
 import React from "react"
 
 import { CheckCircleIcon } from "@heroicons/react/solid"
-import TableData from "./TableData"
+import TableData from "pages/reservation/TableData"
 
-import { formatCurrency } from "../../helpers/helpers"
-import useReservation from "../../hooks/useReservation"
+import { formatCurrency } from "helpers/helpers"
+import useReservation from "hooks/useReservation"
 
 export default function Step5Complete() {   
     
