@@ -1,6 +1,6 @@
 import TitleSection from "components/TitleSection"
 
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/outline"
+import { ChevronLeftIcon, ChevronRightIcon,ArrowNarrowRightIcon } from "@heroicons/react/outline"
 import { Swiper, SwiperSlide } from "swiper/react"
 import SwiperCore, { Navigation, Autoplay } from "swiper"
 import "swiper/swiper-bundle.css"
@@ -200,12 +200,10 @@ const Home = () => {
                 </p>
                 <Link
                     to="/reservation"
-                    className="px-10 py-4 justify-center rounded-full bg-orange-500 text-white flex md:inline-flex items-center  space-x-2 "
+                    className="btn btn-primary"
                 >
-                    <span className="font-bold">Reservación</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
+                    Reservación
+                    <ArrowNarrowRightIcon className="ml-2 h-5 w-5"/>
                 </Link>
             </div>
         </>

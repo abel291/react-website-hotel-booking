@@ -3,7 +3,7 @@ import Flatpickr from "react-flatpickr"
 import "flatpickr/dist/themes/material_green.css"
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js"
 import { useState } from "react"
-import TextLoadingSpinner from "components/TextLoadingSpinner.js"
+
 import Loading from "components/Loading.js"
 import useReservation from "hooks/useReservation.js"
 import NotificationError from "components/NotificationError.js"

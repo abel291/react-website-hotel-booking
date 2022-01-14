@@ -6,7 +6,7 @@ export default function Button({ type = "button", className = "", processing = f
             onClick={handleClick}
             type={type}
             className={
-                "btn " +
+                "btn  " +
                 className
             }
             disabled={processing}

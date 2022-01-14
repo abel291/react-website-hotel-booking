@@ -68,12 +68,7 @@ export default function Header() {
                         ))}
                     </div>
                     <div className="mt-1 lg:mt-0 ">
-                        <NavLink
-                            onClick={() => setOpen(false)}
-                            activeClassName="bg-gray-200 "
-                            to="/reservation"
-                            className="px-3  py-2 lg:px-4 lg:py-2 lg:text-sm rounded-md lg:rounded-full lg:bg-orange-500 lg:text-white inline-flex space-x-1 items-center font-bold focus:outline-none focus:shadow-outline"
-                        >
+                        <NavLink onClick={() => setOpen(false)} to="/reservation" className="btn btn-primary ">
                             <BookmarkIcon className="h-4 w-4"></BookmarkIcon>
                             <span>Reservaciónes</span>
                         </NavLink>

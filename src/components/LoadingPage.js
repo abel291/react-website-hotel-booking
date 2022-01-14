@@ -8,7 +8,7 @@ const LoadingPage = () => {
     }, [mutate])
     return (
         <>
-            <div className=" container mx-auto  animate-pulse">
+            <div className=" container mx-auto  animate-pulse min-h-screen">
                 <div className="py-content space-y-3">
                     <div className="h-6 md:w-1/5 bg-gray-200 rounded-md"></div>
                     <div className="h-10 md:w-3/5 bg-gray-200 rounded-md"></div>

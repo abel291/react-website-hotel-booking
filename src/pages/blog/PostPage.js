@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom"
 import usePage from "hooks/usePage"
 import NotificationError from "components/NotificationError"
 import LoadingPage from "components/LoadingPage"
-import ValidationErrors from "components/ValidationErrors"
+
 import { formatErrors } from "helpers/helpers"
 const PostPage = () => {
     const { slug } = useParams()

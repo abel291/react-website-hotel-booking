@@ -1,7 +1,6 @@
 import React from "react"
 
 import { useState } from "react"
-import TextLoadingSpinner from "components/TextLoadingSpinner"
 import ValidationErrors from "components/ValidationErrors"
 import { formatCurrency } from "helpers/helpers"
 import useReservation from "hooks/useReservation"

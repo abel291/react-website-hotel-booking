@@ -23,10 +23,10 @@ const App = () => {
                     fetcher: (url) => apiClient.get(url).then((res) => res.data),
                 }}
             >   
-            <div className="flex flex-col min-h-screen">
+            <div className="">
                 <Header />
                 <div
-                    className={`flex-grow ${transitionStage}`}
+                    className={`${transitionStage}`}
                     onAnimationEnd={() => {
                         if (transitionStage === "fadeOut") {
                             setTransistionStage("fadeIn")
