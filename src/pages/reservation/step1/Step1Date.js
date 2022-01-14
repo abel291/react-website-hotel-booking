@@ -8,6 +8,7 @@ import TextLoadingSpinner from "components/TextLoadingSpinner"
 import useReservation from "hooks/useReservation"
 import ValidationErrors from "components/ValidationErrors"
 import NotificationError from "components/NotificationError"
+import Button from "components/Button"
 
 function Step1Date() {
     const { data, updateData, step1Fetch } = useReservation()
@@ -45,8 +46,8 @@ function Step1Date() {
         <>
             <NotificationError errors={errors} />
             <div className="max-w-2xl mx-auto space-y-4 sm:space-y-8 ">
-                <h2 className="text-2xl font-medium font-title">Elija las Fechas</h2>
-                <form id="sumbitStep1" className="space-y-4  font-medium" onSubmit={handleSubmit}>
+                <h2 className="text-2xl font-bold font-title">Elija las Fechas</h2>
+                <form id="sumbitStep1" className="space-y-4 " onSubmit={handleSubmit}>
                     <div className="flex flex-wrap ">
                         <div className="w-full sm:w-1/2 space-y-1 ">
                             <label className="block font-medium text-sm" htmlFor="start_date">
@@ -136,14 +137,15 @@ function Step1Date() {
                         </div>
                     </div>
                     <div className="text-right">
-                        <button id="buttonSumbitStep1" disabled={loading} type="submit" className="btn_next_step_reservation">
+                    <Button type="submit" className="btn-primary"  processing={loading} >Chekear disponibilidad</Button>
+                        {/* <button id="buttonSumbitStep1" disabled={loading} type="submit" className="btn_next_step_reservation">
                             <TextLoadingSpinner
                                 isLoading={loading}
                                 className="h-5 w-5 text-gray-100"
                                 text="Chekear disponibilidad"
                                 textLoading="Buscando Disponibilidad..."
                             />
-                        </button>
+                        </button> */}
                     </div>
                 </form>
             </div>

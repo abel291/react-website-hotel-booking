@@ -7,7 +7,6 @@ export const formatCurrency = (n) => {
     return "$ " + currencyFormat.format(parseFloat(n))
 }
 export const formatErrors = (error) => {
-    console.log(error.response)
     if (error.response.status === 422) {
         return error.response.data.errors ? Object.values(error.response.data.errors).flat() : error.response.data.message
     } else {

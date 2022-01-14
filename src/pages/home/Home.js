@@ -10,6 +10,8 @@ import InputReservation from "pages/home/InputReservation"
 import usePage from "hooks/usePage"
 import Head from "components/Head"
 import LoadingPage from "components/LoadingPage"
+import NotificationError from "components/NotificationError"
+import { formatErrors } from "helpers/helpers"
 const testimonals = [
     {
         title: "¡El mejor hotel! ",
@@ -45,7 +47,8 @@ const testimonals = [
 
 SwiperCore.use([Navigation, Autoplay])
 const Home = () => {
-    const { data } = usePage("page/home")
+    const { data,error} = usePage("page/home")
+    if (error) return <NotificationError errors={formatErrors(error)} />
     if (!data) return <LoadingPage/>
     return (
         <>  

@@ -1,6 +1,7 @@
 import React from "react"
 import { formatCurrency } from "helpers/helpers"
 import useReservation from "hooks/useReservation"
+import Button from "components/Button"
 
 export default function Step2Rooms() {
     const { data, updateData } = useReservation()
@@ -21,7 +22,7 @@ export default function Step2Rooms() {
     return (
         <>
             <div className="max-w-5xl mx-auto space-y-4 sm:space-y-8">
-                <h2 className="text-2xl font-medium font-title ">Elija las Habitaciones</h2>
+                <h2 className="text-2xl font-bold font-title ">Elija las Habitaciones</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-3 gap-4">
                     {data.rooms.map((room) => (
                         <div key={room.id} className="shadow rounded-lg overflow-hidden">
@@ -62,21 +63,20 @@ export default function Step2Rooms() {
                                         ))}
                                     </select>
                                 </div>
-
-                                <button
+                                <Button className="btn-primary w-full"  handleClick={() => handleSelectRoom(room.id)}>Selecionar</Button>
+                                {/* <button
                                     onClick={() => handleSelectRoom(room.id)}
                                     className="w-full py-2 bg-orange-500 hover:bg-orange-400 text-white font-bold rounded-md focus:outline-none "
                                 >
                                     Selecionar
-                                </button>
+                                </button> */}
                             </div>
                         </div>
                     ))}
                 </div>
-                <div className="flex space-x-3 ">
-                    <button onClick={() => updateData("step", 1)} className="btn_back_step_reservation">
-                        Volver
-                    </button>
+                <div className="">
+                    <Button className="btn-secondary" handleClick={() => updateData("step", 1)}>Volver</Button>
+                    
                 </div>
             </div>
         </>

@@ -2,7 +2,7 @@ import AboutUs from "pages/aboutUs/AboutUs"
 import Blog from "pages/blog/Blog"
 import PostPage from "pages/blog/PostPage"
 import CancellationPolicies from "pages/cancellationPolicies/CancellationPolicies"
-import Contac from "pages/contact/Contact"
+import Contact from "pages/contact/Contact"
 import CookiePolicies from "pages/cookiePolicies/CookiePolicies"
 import Gallery from "pages/gallery/Gallery"
 import Home from "pages/home/Home"
@@ -16,7 +16,7 @@ const routes = {
     home: { name: "home", path: "/", Component: Home },
     rooms: { name: "rooms", path: "/rooms", Component: Rooms },
     about: { name: "about-us", path: "/about-us", Component: AboutUs },
-    contact: { name: "contact", path: "/contact", Component: Contac },
+    contact: { name: "contact", path: "/contact", Component: Contact },
     blog: { name: "blog", path: "/blog", Component: Blog },
     post: { name: "post", path: "/post/:slug", Component: PostPage },
     gallery: { name: "gallery", path: "/gallery", Component: Gallery },

@@ -1,5 +1,7 @@
 
 import LoadingPage from "components/LoadingPage"
+import NotificationError from "components/NotificationError"
+import { formatErrors } from "helpers/helpers"
 import useReservation from "hooks/useReservation"
 import Step1Date from "pages/reservation/step1/Step1Date"
 import Step2Rooms from "pages/reservation/step2/Step2Rooms"
@@ -8,10 +10,12 @@ import Step4Checkout from "pages/reservation/step4/Step4Checkout"
 import Step5Complete from "pages/reservation/Step5Complete"
 
 function Reservation() {
-    const { data} = useReservation()  
+    const { data,error} = useReservation()  
     
-
+    if (error) return <NotificationError errors={formatErrors(error)} />
+    
     if (!data) return <LoadingPage />
+    
     return (
         <div id="container-main" className="container min-h-screen mx-auto flex items-center py-content justify-center ">
             <div className="w-full">

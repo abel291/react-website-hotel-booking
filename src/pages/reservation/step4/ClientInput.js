@@ -9,6 +9,7 @@ import useReservation from "hooks/useReservation.js"
 import NotificationError from "components/NotificationError.js"
 import Input from "components/Input"
 import Label from "components/Label"
+import Button from "components/Button"
 export default function Step4Form() {
     const { data, updateData, step4Fetch } = useReservation()
     const [errors, setErrors] = useState([])
@@ -26,20 +27,23 @@ export default function Step4Form() {
     const handleSubmit = async (e) => {
         e.preventDefault()
         setErrors([])
-        setLoadingStripe(true)
+        
         setLoading(false)
+        
 
         if (!data.client.titleCard) {
+            
             setErrors(["El nombre del titular de la targeta es requerido"])
             return
         }
-
+        
         if (!stripe || !elements) {
+            
             // Stripe.js aún no se ha cargado. Asegúrate de deshabilitar
             // envío del formulario hasta que se haya cargado Stripe.js.
             return
         }
-
+        setLoadingStripe(true)
         // Obtenga una referencia a un CardElement montado
         const cardElement = elements.getElement(CardElement)
 
@@ -49,10 +53,8 @@ export default function Step4Form() {
             card: cardElement,
             billing_details: { name: data.client.titleCard },
         })
-
+        setLoadingStripe(false)
         if (error) {
-            setLoadingStripe(false)
-
             if (error.type === "validation_error") {
                 setErrors([error.message])
             } else {
@@ -71,11 +73,11 @@ export default function Step4Form() {
                 <div>
                     <div className=" grid grid-cols-1 sm:grid-cols-2 gap-x-2 gap-y-4 w-full">
                         <Input label="Nombre y apellido" name="name" handleChange={handleChangeInput} value={data.client.name} />
-                        
+
                         <Input label="Telefono" name="phone" handleChange={handleChangeInput} value={data.client.phone} />
-                        
+
                         <Input label="Email" name="email" handleChange={handleChangeInput} value={data.client.email} type="email" />
-                        
+
                         <Input
                             label="Confirmar email"
                             name="email_confirmation"
@@ -83,11 +85,10 @@ export default function Step4Form() {
                             value={data.client.email}
                             type="email"
                         />
-                        
+
                         <Input label="Pais" name="country" handleChange={handleChangeInput} value={data.client.country} />
-                        
+
                         <Input label="Ciudad" name="city" handleChange={handleChangeInput} value={data.client.city} />
-                       
 
                         <div>
                             <Label htmlFor="check_in">Hora de llegada</Label>
@@ -162,19 +163,23 @@ export default function Step4Form() {
                 </div>
             </div>
             <div className="flex flex-wrap space-y-3 md:space-y-0 md:space-x-3 justify-end">
-                <label htmlFor=""> {loadingStripe ? 1 : 0}</label>
-                <button onClick={() => updateData("step", 3)} className="btn_back_step_reservation">
+                <Button className="btn-secondary" handleClick={() => updateData("step", 3)}>
                     Volver
-                </button>
-
-                <button onClick={handleSubmit} disabled={!stripe || loadingStripe} className="btn_next_step_reservation">
+                </Button>
+                <Button className="btn-primary" handleClick={handleSubmit} processing={loadingStripe}>
+                    Confirmar ordenn
+                </Button>
+                {/* <button onClick={() => updateData("step", 3)} className="btn_back_step_reservation">
+                    Volver
+                </button> */}
+                {/* <button onClick={handleSubmit} disabled={!stripe || loadingStripe} className="btn_next_step_reservation">
                     <TextLoadingSpinner
                         className="w-5 h-5 text-gray-100"
                         isLoading={loadingStripe}
                         text="Confirmar orden"
                         textLoading="Confirmando...."
                     />
-                </button>
+                </button> */}
             </div>
         </>
     )

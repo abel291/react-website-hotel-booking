@@ -5,12 +5,13 @@ import TextLoadingSpinner from "components/TextLoadingSpinner"
 import ValidationErrors from "components/ValidationErrors"
 import { formatCurrency } from "helpers/helpers"
 import useReservation from "hooks/useReservation"
+import Button from "components/Button"
 
 //import { useEffect } from "react"
 export default function Step3Complements() {
     const { data, updateData, step3Fetch } = useReservation()
     const [loading, setLoading] = useState(false)
-    const [errors, setErrors] = useState([])  
+    const [errors, setErrors] = useState([])
     const handleChecked = (checked, idComplements) => {
         if (checked) {
             data.complementsIds.push(idComplements)
@@ -22,14 +23,14 @@ export default function Step3Complements() {
     const handleNextStep = async (e) => {
         e.preventDefault()
 
-        await step3Fetch({setErrors,setLoading })
+        await step3Fetch({ setErrors, setLoading })
     }
 
     return (
-        <>  
+        <>
             <ValidationErrors errors={errors} />
             <div className="mx-auto max-w-5xl space-y-4 sm:space-y-8">
-                <h2 className="text-2xl font-medium font-title ">Agregue complementos adicionale</h2>
+                <h2 className="text-2xl font-bold font-title ">Agregue complementos adicionale</h2>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {data.roomSelected.complements.map((complement) => (
@@ -64,19 +65,14 @@ export default function Step3Complements() {
                     ))}
                 </div>
 
-                <div className="flex flex-wrap space-y-3 sm:space-y-0 sm:space-x-3 justify-end">
-                    <button onClick={() => updateData("step", 2)} className="btn_back_step_reservation">
+                <div className="flex justify-end">
+                    <Button  className="btn-secondary mr-3" handleClick={() => updateData("step", 1)}>
                         Volver
-                    </button>
+                    </Button>
 
-                    <button onClick={handleNextStep} className="btn_next_step_reservation" disabled={loading}>
-                        <TextLoadingSpinner
-                            className="h-5 w-5 text-gray-100"
-                            isLoading={loading}
-                            text="Confirmar Datos"
-                            textLoading="Verificando ..."
-                        />
-                    </button>
+                    <Button  className="btn-primary"  handleClick={handleNextStep} processing={loading}>
+                        Confirmar Datos
+                    </Button>
                 </div>
             </div>
         </>

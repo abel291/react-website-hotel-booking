@@ -1,11 +1,16 @@
 import BannerTitle from "components/BannerTitle"
 import Head from "components/Head"
 import LoadingPage from "components/LoadingPage"
+import NotificationError from "components/NotificationError"
+import { formatErrors } from "helpers/helpers"
 import usePage from "hooks/usePage"
 
 const CancellationPolicies = () => {
-    const { data } = usePage("page/cookies_policy")
-    if (!data) return <LoadingPage/>
+    const { data,error } = usePage("page/cookies_policy")
+    if (error) return <NotificationError errors={formatErrors(error)} />
+    
+    if (!data) return <LoadingPage />
+    
     return (
         <>
             <Head title={data.page.seo_title} description={data.page.seo_description} />

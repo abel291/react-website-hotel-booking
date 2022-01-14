@@ -7,9 +7,11 @@ import BannerTitle from "components/BannerTitle"
 import GalleriesPageLoading from "pages/gallery/GalleriesPageLoading"
 import usePage from "hooks/usePage"
 import LoadingPage from "components/LoadingPage"
+import NotificationError from "components/NotificationError"
+import { formatErrors } from "helpers/helpers"
 
 const Gallery = () => {
-    const { data } = usePage("page/gallery")
+    const { data, error } = usePage("page/gallery")
     const textLoadedRef = useRef()
 
     useEffect(() => {
@@ -51,7 +53,8 @@ const Gallery = () => {
         })
     }
 
-    if (!data) return <LoadingPage/>
+    if (error) return <NotificationError errors={formatErrors(error)} />
+    if (!data) return <LoadingPage />
 
     return (
         <>
@@ -63,48 +66,45 @@ const Gallery = () => {
                         playa soleada y las aventuras activas.
                     </p>
                 </div>
-                {!data ? (
-                    <GalleriesPageLoading />
-                ) : (
-                    <>
-                        <div className="filter-images  flex flex-col sm:flex-row  text-lg space-x-0 sm:space-x-6">
-                            <button className="img-filter font-bold py-2 focus:outline-none capitalize" data-filter="*">
-                                Todas
+
+                <>
+                    <div className="filter-images  flex flex-col sm:flex-row  text-lg space-x-0 sm:space-x-6">
+                        <button className="img-filter font-bold py-2 focus:outline-none capitalize" data-filter="*">
+                            Todas
+                        </button>
+                        {data.galleries.map((gallery, index) => (
+                            <button
+                                key={index}
+                                data-filter={".data-" + gallery.slug}
+                                className="filter-images hover:cursor-pointer img-filter font-bold py-2  focus:outline-none capitalize"
+                            >
+                                {gallery.slug}
                             </button>
-                            {data.galleries.map((gallery, index) => (
-                                <button
+                        ))}
+                    </div>
+                    <div>
+                        <div ref={textLoadedRef}></div>
+                        <div id="gallery-img">
+                            {data.images.map((image, index) => (
+                                <div
                                     key={index}
-                                    data-filter={".data-" + gallery.slug}
-                                    className="filter-images hover:cursor-pointer img-filter font-bold py-2  focus:outline-none capitalize"
+                                    className={"img-item w-full md:w-2/4 lg:w-1/3 p-2 data-" + image.slug}
+                                    onClick={() => openLightboxOnSlide(index)}
                                 >
-                                    {gallery.slug}
-                                </button>
+                                    <div className="overflow-hidden">
+                                        <img src={image.image} className=" cursor-pointer rounded-md w-full" alt={image.image} />
+                                    </div>
+                                </div>
                             ))}
                         </div>
-                        <div>
-                            <div ref={textLoadedRef}></div>
-                            <div id="gallery-img">
-                                {data.images.map((image, index) => (
-                                    <div
-                                        key={index}
-                                        className={"img-item w-full md:w-2/4 lg:w-1/3 p-2 data-" + image.slug}
-                                        onClick={() => openLightboxOnSlide(index)}
-                                    >
-                                        <div className="overflow-hidden">
-                                            <img src={image.image} className=" cursor-pointer rounded-md w-full" alt={image.image} />
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
+                    </div>
 
-                        <FsLightbox
-                            toggler={lightboxController.toggler}
-                            sources={data.images.map((image) => image.image)}
-                            slide={lightboxController.slide}
-                        />
-                    </>
-                )}
+                    <FsLightbox
+                        toggler={lightboxController.toggler}
+                        sources={data.images.map((image) => image.image)}
+                        slide={lightboxController.slide}
+                    />
+                </>
             </div>
         </>
     )

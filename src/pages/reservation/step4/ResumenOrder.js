@@ -5,6 +5,7 @@ import useReservation from "hooks/useReservation"
 
 import NotificationError from "components/NotificationError"
 import Input from "components/Input"
+import Button from "components/Button"
 
 export default function Step4ResumenOrder() {
     const { data, step3Fetch } = useReservation()
@@ -35,10 +36,11 @@ export default function Step4ResumenOrder() {
                                 autoComplete="off"
                             />
                         </div>
+                        
                         <button
                             onClick={handleClickApplyCodeDiscount}
                             disabled={!discountInput || loading}
-                            className="w-24 py-3 font-medium text-white rounded-md  focus:outline-none bg-orange-500 disabled:opacity-50 inline-flex items-center justify-center"
+                            className="w-24 py-3 btn btn-primary"
                         >
                             <TextLoadingSpinner className="h-5 w-5 text-gray-100" isLoading={loading} text="Aplicar" textLoading="" />
                         </button>

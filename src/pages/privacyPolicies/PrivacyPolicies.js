@@ -1,11 +1,17 @@
 import BannerTitle from "components/BannerTitle"
 import Head from "components/Head"
 import LoadingPage from "components/LoadingPage"
+import NotificationError from "components/NotificationError"
+import { formatErrors } from "helpers/helpers"
 import usePage from "hooks/usePage"
 
 const PrivacyPolicies = () => {
-    const { data } = usePage("page/privacy_policy")
-    if (!data) return <LoadingPage/>
+    const { data,error } = usePage("page/privacy_policy")
+
+    if (error) return <NotificationError errors={formatErrors(error)} />
+    
+    if (!data) return <LoadingPage />
+    
 
     return (
         <>

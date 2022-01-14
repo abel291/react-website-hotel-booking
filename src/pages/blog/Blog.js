@@ -10,6 +10,8 @@ import usePage from "hooks/usePage"
 
 import BlogPageLoading from "pages/blog/BlogPageLoading"
 import PostsList from "pages/blog/PostsList"
+import NotificationError from "components/NotificationError"
+import { formatErrors } from "helpers/helpers"
 
 const Blog = () => {
     const { data } = usePage("page/blog")
@@ -17,8 +19,9 @@ const Blog = () => {
     const location = history.location
 
     const [pageIndex, setPageIndex] = useState(new URLSearchParams(location.search).get("page") || 1)
-    const { data: posts } = usePage("/page/posts?page=" + pageIndex)
+    const { data: posts,error } = usePage("/page/posts?page=" + pageIndex)
 
+    if (error) return <NotificationError errors={formatErrors(error)} />
     if (!data) return <LoadingPage/>
 
     return (

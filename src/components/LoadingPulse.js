@@ -1,6 +1,6 @@
 const LoadingPulse = () => {
     return (
-        <div>
+        <div className="pb-content">
             
         </div>
     )

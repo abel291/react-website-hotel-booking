@@ -6,8 +6,11 @@ import { Link } from "react-router-dom"
 import Head from "components/Head"
 import usePage from "hooks/usePage"
 import LoadingPage from "components/LoadingPage"
+import NotificationError from "components/NotificationError"
+import { formatErrors } from "helpers/helpers"
 const AboutUs = () => {
-    const { data } = usePage("page/about-us")
+    const { data,error } = usePage("page/about-us")
+    if (error) return <NotificationError errors={formatErrors(error)} />
     if (!data) return <LoadingPage />
     const images = [
         {

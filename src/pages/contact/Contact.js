@@ -1,12 +1,16 @@
 import BannerTitle from "components/BannerTitle"
+import Button from "components/Button"
 import Head from "components/Head"
 import Input from "components/Input"
 import Label from "components/Label"
 import LoadingPage from "components/LoadingPage"
+import NotificationError from "components/NotificationError"
+import { formatErrors } from "helpers/helpers"
 import usePage from "hooks/usePage"
 
 const Contact = () => {
-    const { data } = usePage("page/contact")
+    const { data,error } = usePage("page/contact")
+    if (error) return <NotificationError errors={formatErrors(error)} />
     if (!data) return <LoadingPage />
     return (
         <>
@@ -60,18 +64,10 @@ const Contact = () => {
                             <Input label="Apellido" name="email" placeholder="Email" />
                             <div className="col-span-2">
                                 <Label htmlFor="comment">Comentario</Label>
-                                <textarea
-                                    id="comment"
-                                    rows="5"
-                                    className="w-full form-input mt-1 "
-                                    placeholder="Comentario"
-                                ></textarea>
+                                <textarea id="comment" rows="5" className="w-full form-input mt-1 " placeholder="Comentario"></textarea>
                             </div>
                         </div>
-
-                        <button className="px-4 py-2 md:px-6 rounded-full text-white bg-orange-500 flex md:inline-flex items-center font-bold">
-                            Enviar mensaje
-                        </button>
+                        <Button className="btn-primary">Enviar mensaje</Button>
                     </form>
                 </div>
             </div>

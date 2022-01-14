@@ -22,10 +22,11 @@ const App = () => {
                 value={{
                     fetcher: (url) => apiClient.get(url).then((res) => res.data),
                 }}
-            >
+            >   
+            <div className="flex flex-col min-h-screen">
                 <Header />
                 <div
-                    className={`${transitionStage}`}
+                    className={`flex-grow ${transitionStage}`}
                     onAnimationEnd={() => {
                         if (transitionStage === "fadeOut") {
                             setTransistionStage("fadeIn")
@@ -40,6 +41,7 @@ const App = () => {
                     </Switch>
                 </div>
                 <Footer />
+                </div>
             </SWRConfig>
         </>
     )

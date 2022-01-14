@@ -5,11 +5,11 @@ import TableData from "pages/reservation/TableData"
 
 import { formatCurrency } from "helpers/helpers"
 import useReservation from "hooks/useReservation"
+import Button from "components/Button"
 
-export default function Step5Complete() {   
-    
-    const {data,resetData} =useReservation()
-    
+export default function Step5Complete() {
+    const { data, resetData } = useReservation()
+
     return (
         <>
             <div className="max-w-3xl  mx-auto  space-y-4 md:space-y-8">
@@ -20,7 +20,10 @@ export default function Step5Complete() {
                         <CheckCircleIcon className="h-5 w-5 text-green-400" />
                         <div className="text-green-700">
                             <span className="font-medium block text-green-700">Orden completada</span>
-                            <span className="text-green-600"> Gracias. Tu orden ha sido recibida .Todo los datos han sido enviados a tu correo</span>
+                            <span className="text-green-600">
+                                {" "}
+                                Gracias. Tu orden ha sido recibida .Todo los datos han sido enviados a tu correo
+                            </span>
                         </div>
                     </div>
 
@@ -48,14 +51,14 @@ export default function Step5Complete() {
                     <h2 className="text-xl font-medium font-title mb-4  ">Resumen de pedido</h2>
                     <TableData data={data} />
                 </div>
-                <div className="flex flex-col md:flex-row justify-end md:space-x-3 space-y-2 md:space-y-0">
-                    <button onClick={resetData} className="btn_back_step_reservation">
-                        Volver al inicio
-                    </button>
+                <div className="flex flex-col md:flex-row justify-end ">
+                    <Button className="btn-secondary md:mr-3" handleClick={resetData}>
+                        Volver
+                    </Button>
 
                     <a
-                        className="w-full sm:w-auto btn_next_step_reservation"
-                        href={process.env.REACT_APP_BACKEND_URL+`/reservation/report_pdf?order=${data.order}&email=${data.client.email}`}
+                        className="btn btn-primary"
+                        href={process.env.REACT_APP_BACKEND_URL + `/reservation/report_pdf?order=${data.order}&email=${data.client.email}`}
                         rel="noreferrer"
                         target="_blank"
                     >

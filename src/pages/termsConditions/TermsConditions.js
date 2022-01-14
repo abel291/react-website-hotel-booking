@@ -1,11 +1,16 @@
 import BannerTitle from "components/BannerTitle"
 import Head from "components/Head"
 import LoadingPage from "components/LoadingPage"
+import NotificationError from "components/NotificationError"
+import { formatErrors } from "helpers/helpers"
 import usePage from "hooks/usePage"
 
 const TermsConditions = () => {
-    const { data } = usePage("page/terms_conditions")
-    if (!data) return <LoadingPage/>
+    const { data,error } = usePage("page/terms_conditions")
+    if (error) return <NotificationError errors={formatErrors(error)} />
+    
+    if (!data) return <LoadingPage />
+    
     return (
         <>
             <Head title={data.page.seo_title} description={data.page.seo_description} />

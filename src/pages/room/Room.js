@@ -9,9 +9,14 @@ import BannerTitle from "components/BannerTitle"
 import usePage from "hooks/usePage"
 import Head from "components/Head"
 import LoadingPage from "components/LoadingPage"
+import NotificationError from "components/NotificationError"
+import { formatErrors } from "helpers/helpers"
 const Room = () => {
     const { slug } = useParams()
-    const { data } = usePage("room/" + slug)
+    const { data,error } = usePage("room/" + slug)
+    
+    if (error) return <NotificationError errors={formatErrors(error)} />
+    
     if (!data) return <LoadingPage/>
 
     return (

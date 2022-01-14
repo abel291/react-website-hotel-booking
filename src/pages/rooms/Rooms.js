@@ -8,10 +8,11 @@ import { formatErrors } from "helpers/helpers"
 import usePage from "hooks/usePage"
 import FormReservation from "pages/rooms/FormReservation"
 
+
 const Rooms = () => {
     const { data,error } = usePage("page/rooms")
     
-
+    
     if (error) return <NotificationError errors={formatErrors(error)} />
     if (!data) return <LoadingPage />
     
