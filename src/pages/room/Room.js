@@ -24,7 +24,7 @@ const Room = () => {
         <>
             <Head title={data.room.name} description={data.room.description_min} />
             <BannerTitle title={data.room.name} subTitle={"Habitacion"} img={"/storage/rooms/" + data.room.thumbnail} />
-            <div className="container mx-auto max-w-screen-xl bg-white rounded-t-2xl   md:rounded-none py-content">
+            <div className="container mx-auto  bg-white rounded-t-2xl   md:rounded-none py-content">
                 <div className="flex flex-col lg:flex-row ">
                     <div className="w-full lg:w-2/3 space-y-8 lg:mr-4 mb-8 lg-mb-0">
                         {data.room.images && <CarouselGallery images={data.room.images} path={"/storage/images/"} />}

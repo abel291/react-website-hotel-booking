@@ -17,7 +17,7 @@ const PrivacyPolicies = () => {
         <>
             <Head title={data.page.seo_title} description={data.page.seo_description} />
             <BannerTitle title={data.page.title} subTitle={data.page.sub_title} img={null} />
-            <div class="container mx-auto max-w-screen-xl pb-content ">
+            <div class="container mx-auto  pb-content ">
                 <h3 class="text-4xl font-title font-bold mb-8">Política de privacidad</h3>
 
                 <div class="space-y-4 leading-relaxed">

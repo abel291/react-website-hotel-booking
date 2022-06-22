@@ -15,7 +15,7 @@ const TermsConditions = () => {
         <>
             <Head title={data.page.seo_title} description={data.page.seo_description} />
             <BannerTitle title={data.page.title} subTitle={data.page.sub_title} img={null} />
-            <div className="container mx-auto max-w-screen-xl pb-content ">
+            <div className="container mx-auto  pb-content ">
                 <h3 className="text-4xl  font-bold mb-8 font-title">Términos y condiciones</h3>
 
                 <div className="space-y-4  leading-relaxed">

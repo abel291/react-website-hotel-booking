@@ -4,7 +4,7 @@ import routes from "routes"
 export default function Footer() {
     return (
         <footer className=" border-t border-gray-100  ">
-            <div className="container py-content mx-auto max-w-screen-xl">
+            <div className="container py-content mx-auto ">
                 <div className=" flex flex-col  justify-between space-y-6 md:space-y-8">
                     <div className="flex items-center justify-center space-x-5">
                         <img src="/img/facebook-icon.png" alt="facebook" />

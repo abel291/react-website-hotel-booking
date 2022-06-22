@@ -28,7 +28,7 @@ const Blog = () => {
         <>  
             <Head title={data.page.seo_title} description={data.page.seo_description} />
             <BannerTitle title={data.page.title} subTitle={data.page.sub_title} img={null} />
-            <div id="postsScroll" className="container mx-auto max-w-screen-xl pb-content">
+            <div id="postsScroll" className="container mx-auto  pb-content">
                 {!posts ? (
                     <BlogPageLoading />
                 ) : (

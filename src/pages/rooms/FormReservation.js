@@ -38,7 +38,7 @@ const FormReservation = () => {
 
     return (
         <div className="border-b border-gray-100">
-            <div className="container mx-auto max-w-screen-xl">
+            <div className="container mx-auto ">
                 <form action="" onSubmit={hanldeSumbit} className="py-4  flex space-y-3 xl:space-y-0 flex-wrap ">
                     <div className="w-full xl:w-5/12 xl:pr-4 ">
                         <div className="flex flex-wrap  border border-gray-300 rounded-lg md:divide-x h-full">

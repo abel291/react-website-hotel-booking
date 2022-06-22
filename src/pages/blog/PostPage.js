@@ -14,7 +14,7 @@ const PostPage = () => {
     
 
     return (
-        <div className="container mx-auto max-w-screen-xl py-content">
+        <div className="container mx-auto  py-content">
             <div className="space-y-8 md:space-y-24">
                 <div className="text-center space-y-3 md:space-y-6">
                     <span className="tracking-widest uppercase text-gray-400 text-sm md:text-base ">

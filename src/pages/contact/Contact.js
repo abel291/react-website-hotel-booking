@@ -16,7 +16,7 @@ const Contact = () => {
         <>
             <Head title={data.page.seo_title} description={data.page.seo_description} />
             <BannerTitle title={data.page.title} subTitle={data.page.sub_title} img={null} />
-            <div className="container mx-auto max-w-screen-xl ">
+            <div className="container mx-auto  ">
                 <div className="flex flex-col sm:flex-row sm:space-x-24 space-y-4 sm:space-y-0">
                     <div>
                         <h4 className="font-bold font-title text-xl md:pb-4">Direccion</h4>

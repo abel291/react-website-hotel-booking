@@ -66,7 +66,7 @@ const AboutUs = () => {
         <>
             <Head title={data.page.seo_title} description={data.page.seo_description} />
             <BannerTitle title={data.page.title} subTitle={data.page.sub_title} img={null} />
-            <div className="container mx-auto max-w-screen-xl">
+            <div className="container mx-auto ">
                 <div className="pb-content">
                     <div className=" max-w-md flex flex-col md:flex-row md:items-center justify-between pb-14 space-y-4 md:space-y-0 md:space-x-5">
                         <div>
