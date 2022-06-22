@@ -166,7 +166,7 @@ const AboutUs = () => {
                     <div>
                         <div className="grid md:grid-cols-3 grid-cols-1 gap-4">
                             {theme.map((p) => (
-                                <div key={p.name} className="">
+                                <div key={p.name} >
                                     <div className="rounded-lg h-96 overflow-hidden">
                                         <img src={p.img} alt="Robert Fo" className=" object-cover w-full" />
                                     </div>

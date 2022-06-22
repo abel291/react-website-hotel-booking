@@ -41,7 +41,7 @@ const SelectForm = ({handleSubmitReservation}) => {
                     />
                 </div>
 
-                <div className="">
+                <div >
                     <label className="form-input-label" htmlFor="end_date">
                         Fecha de final
                     </label>
@@ -100,7 +100,7 @@ const SelectForm = ({handleSubmitReservation}) => {
                     </select>
                 </div>
             </div>
-            <div className="">
+            <div >
                 <button type="submit" className=" w-full bg-orange-500 py-3  text-white rounded-full font-bold text-base">
                     Chekear disponibilidad
                 </button>

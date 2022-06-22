@@ -11,7 +11,7 @@ const Pagination = ({ paginator,setPageIndex,scrollTopId="root" }) => {
     return (
         <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
             <div>
-                <p className="">
+                <p >
                     Muestra
                     <span className="font-bold"> {paginator.from} </span>a<span className="font-bold"> {paginator.to} </span>
                     de

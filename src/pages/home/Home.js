@@ -179,7 +179,7 @@ const Home = () => {
                                     <SwiperSlide key={index}>
                                         <div key={index} className="w-full h-full  p-8 rounded-md  bg-white space-y-2 text-gray-500">
                                             <h4 className=" text-2xl font-medium font-title text-gray-500">{testimony.title}</h4>
-                                            <p className="">- {testimony.text}</p>
+                                            <p >- {testimony.text}</p>
                                             <div>
                                                 <span className=" font-medium">{testimony.name}</span>
                                             </div>

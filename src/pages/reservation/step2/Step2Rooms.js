@@ -74,7 +74,7 @@ export default function Step2Rooms() {
                         </div>
                     ))}
                 </div>
-                <div className="">
+                <div >
                     <Button className="btn-secondary" handleClick={() => updateData("step", 1)}>Volver</Button>
                     
                 </div>

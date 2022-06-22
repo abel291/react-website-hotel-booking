@@ -61,7 +61,7 @@ export default function TableData({ data, children }) {
                     <div className="space-y-2">
                         {data.complementsSelect.map((com) => (
                             <div key={com.id} className="flex justify-between ">
-                                <span className="">{com.name}</span>
+                                <span >{com.name}</span>
                                 <span>{formatCurrency(com.total_price)}</span>
                             </div>
                         ))}
@@ -78,7 +78,7 @@ export default function TableData({ data, children }) {
                     </div>
                     {data.discount && (
                         <div className="flex justify-between text-green-500">
-                            <span className="">Descuento {data.discount.percent + "%"}</span>
+                            <span >Descuento {data.discount.percent + "%"}</span>
                             <span>{formatCurrency(-data.discount.amount)}</span>
                         </div>
                     )}
@@ -86,7 +86,7 @@ export default function TableData({ data, children }) {
             </div>
             <div className="px-3 md:px-6 py-4 space-y-2">
                 <div className="flex justify-between font-bold text-lg">
-                    <span className="">Total</span>
+                    <span >Total</span>
                     <span>{formatCurrency(data.totalPrice)}</span>
                 </div>
             </div>

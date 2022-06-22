@@ -19,7 +19,7 @@ const TermsConditions = () => {
                 <h3 className="text-4xl  font-bold mb-8 font-title">Términos y condiciones</h3>
 
                 <div className="space-y-4  leading-relaxed">
-                    <p className="">
+                    <p>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam elit felis, porta ut massa in, consectetur finibus
                         nibh. Vestibulum in efficitur velit. Proin mollis est in risus faucibus, nec finibus mauris vehicula. Duis at
                         eleifend dui. Maecenas in dui eget erat ullamcorper dignissim nec sit amet tortor. Vivamus lorem felis, semper in
